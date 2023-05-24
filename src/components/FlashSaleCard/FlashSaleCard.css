@@ -7,7 +7,7 @@
     justify-content: space-between;
     max-width: 250px;
     min-width: 200px;
-    height: 350px;
+    height: 400px;
     margin:15px;
 }
 
@@ -32,3 +32,12 @@
     color:#0E42FD;
 }
 
+
+.flash-sale-card-img{
+    width:100px;
+}
+
+.flash-sale-card-title{
+    font-size: 16px;
+    text-align: center;
+}

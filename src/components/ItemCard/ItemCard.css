@@ -7,24 +7,31 @@
     justify-content: space-between;
     max-width: 250px;
     min-width: 200px;
-    height: 350px;
-    margin:15px;
+    height: 450px;
+    margin:15px; 
 }
 
 .item-card-details-container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    background-color: #2BD9AF;
+    justify-content: flex-start; 
     border-radius: 20px;
     padding: 10px;
-    height: 130px;
+    height: 180px;
     overflow: hidden;
+}
+.card-mens{
+    background:#2BD9AF;
+}
+.card-womens{
+    background:#FF5E84;
 }
 
 .item-card-desc{
     text-align: center;
+    font-size: 12px;
+    overflow: hidden;
 }
 
 .item-card-price{
@@ -32,3 +39,13 @@
     color:#0E42FD;
 }
 
+.item-card-title{
+    font-size: 16px;
+    text-align: center;
+    padding: 5px 10px;
+}
+.item-card-img{
+    width:100px;
+    max-height: 100px;
+    margin-bottom: 20px;
+}
