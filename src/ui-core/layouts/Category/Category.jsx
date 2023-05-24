@@ -20,3 +20,5 @@ export default class Category extends Component {
     );
   }
 }
+
+// rename to template
