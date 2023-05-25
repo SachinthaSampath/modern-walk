@@ -1,0 +1,14 @@
+.flex-container{  
+  margin:40px;
+}
+.flex-container-heading{
+
+}
+
+.flex-container-main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; 
+  align-items: stretch;
+}
+

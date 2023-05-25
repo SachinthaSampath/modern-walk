@@ -2,17 +2,12 @@
 
 }
 .category-main-container{
-    margin:40px;
-}
-.category-container{
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 100px;
+     
 }
 
-.category-container div:first-child{
+.category-card-container:first-child{
     background-color:#2BD9AF ;
 }
-.category-container div:nth-child(2){
+.category-card-container:nth-child(2){
     background-color:#FF5E84 ;
 }
