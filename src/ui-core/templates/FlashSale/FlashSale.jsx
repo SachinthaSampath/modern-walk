@@ -1,35 +1,34 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "./FlashSale.css";
-import FlashSaleCard from "../FlashSaleCard/FlashSaleCard";
-import ItemCard from "../ItemCard/ItemCard";
+import FlexContainer from "../../layouts/FlexContainer/FlexContainer";
 
-export default class FlashSale extends Component {
-  constructor(props) {
-    super(props);
+import ItemCard from "../../components/molecules/ItemCard/ItemCard";
 
-    this.state = {
-      flashItems: [],
-    };
-  }
+export default function FlashSale() {
+  const [flashItems, setFlashItems] = useState([]);
 
-  componentDidMount = () => {
-    fetch("https://fakestoreapi.com/products?limit=5")
-      .then((res) => res.json())
-      .then((json) => {
-        this.setState({flashItems:json});
-      });
-  };
-
-  render() {
-    return (
-      <div className="flash-sale-main-container">
-        <h2 className="flash-sale-title">Flash Sale</h2>
-        <div className="flash-sale-container">
-          {this.state.flashItems.map((fi) => {
-            return <ItemCard key={fi.id} itemData={fi} />;
-          })}
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          "https://fakestoreapi.com/products?limit=5"
+        );
+        const jsonData = await response.json();
+        setFlashItems(jsonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+ 
+  return (
+    <div className="flash-sale-container"> 
+      <FlexContainer heading={"Flash Sale"}>
+        {flashItems.map((fi) => {
+          return <ItemCard key={fi.id} itemData={fi} />;
+        })}
+      </FlexContainer>
+    </div>
+  );
 }

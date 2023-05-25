@@ -1,40 +1,32 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import "./MensClothing.css";
-import Header from "../../components/Header/Header";
+import Header from "../../../components/molecules/Header/Header";
+import ItemCard from "../../../components/molecules/ItemCard/ItemCard";
+import FlexContainer from "../../../layouts/FlexContainer/FlexContainer";
 
-import ItemCard from "../../components/ItemCard/ItemCard";
+export default function MensClothing() {
+  const [items, setItems] = useState([]);
 
-export default class MensClothing extends Component {
-  constructor(props) {
-    super(props);
-   
-    this.state = {
-      items: [],
-    };
-  }
-
-  componentDidMount = () => {
+  useEffect(() => {
+    //run on first render (componentsDidMount)
     fetch("https://fakestoreapi.com/products/category/men's clothing")
       .then((res) => res.json())
       .then((json) => {
-        this.setState({items:json});
+        setItems(json);
       });
-  };
+    return () => {
+      //runs on cleanup (componenetWillUnmount)
+    };
+  }, []);
 
-  render() {
-    
-    return (
-      <div className="mens-clothing-main-container">
-        <Header />
-        <div className="mens-clothing-sub-container">
-          <h2>Men's Clothing</h2>
-          <div className="mens-clothing-item-container">
-            {this.state.items.map((i) => {
-              return <ItemCard itemData={i} />;
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  }
+  return (
+    <>
+      <Header headingText="Modern Walk" />
+      <FlexContainer heading={"Men's Clothing"}>
+        {items.map((i) => {
+          return <ItemCard key={i.id} itemData={i} />;
+        })}
+      </FlexContainer>
+    </>
+  );
 }
