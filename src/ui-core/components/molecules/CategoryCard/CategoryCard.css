@@ -1,0 +1,14 @@
+.category-card-container{
+    border-radius: 15px;
+    padding: 40px;
+    margin:20px;
+    width: 30%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.category-card-container a{
+    text-decoration: none;
+    color: white;
+}

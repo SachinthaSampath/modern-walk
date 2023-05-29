@@ -1,26 +1,18 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  Routes,
-} from "react-router-dom";
-import MensClothing from "./pages/MensClothing/MensClothing";
-import WomensClothing from "./pages/WomensClothing/WomensClothing";
-import HomePage from "./pages/HomePage/HomePage";
-import NotFound from "./pages/NotFound/NotFound";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from './ui-core/pages/HomePage/HomePage';
+import MensClothing from './ui-core/pages/MensClothing/MensClothing'
+import WomensClothing from "./ui-core/pages/WomensClothing/WomensClothing";
 
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
-    <div className="main-container"> 
+    <div className="main-container">
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage/>} />
-          <Route path="/mens" element={<MensClothing/>} />
-          <Route path="/womens" element={<WomensClothing/>} />
-          <Route element={<NotFound/>} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/mens" element={<MensClothing />} />
+          <Route path="/womens" element={<WomensClothing />} /> 
         </Routes>
       </Router>
     </div>

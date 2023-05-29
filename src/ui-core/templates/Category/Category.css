@@ -1,0 +1,6 @@
+.category-card-container:first-child{
+    background-color:#2BD9AF ;
+}
+.category-card-container:nth-child(2){
+    background-color:#FF5E84 ;
+}
