@@ -1,9 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-import HomePage from "./ui-core/templates/pages/HomePage/HomePage";
-import MensClothing from "./ui-core/templates/pages/MensClothing/MensClothing";
-import WomensClothing from "./ui-core/templates/pages/WomensClothing/WomensClothing";
-import NotFound from "./ui-core/templates/pages/NotFound/NotFound";
+import HomePage from './ui-core/pages/HomePage/HomePage';
+import MensClothing from './ui-core/pages/MensClothing/MensClothing'
+import WomensClothing from "./ui-core/pages/WomensClothing/WomensClothing";
 
 import "./App.css";
 
@@ -14,8 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/mens" element={<MensClothing />} />
-          <Route path="/womens" element={<WomensClothing />} />
-          <Route element={<NotFound />} />
+          <Route path="/womens" element={<WomensClothing />} /> 
         </Routes>
       </Router>
     </div>

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import "./MensClothing.css";
-import Header from "../../../components/molecules/Header/Header";
-import ItemCard from "../../../components/molecules/ItemCard/ItemCard";
-import FlexContainer from "../../../layouts/FlexContainer/FlexContainer";
+import React, { useEffect, useState } from "react"; 
+import Header from "../../components/molecules/Header/Header";
+import ItemCard from "../../components/molecules/ItemCard/ItemCard";
+import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
 
 export default function MensClothing() {
   const [items, setItems] = useState([]);
@@ -22,11 +21,11 @@ export default function MensClothing() {
   return (
     <>
       <Header headingText="Modern Walk" />
-      <FlexContainer heading={"Men's Clothing"}>
+      <SectionLayout heading={"Men's Clothing"}>
         {items.map((i) => {
           return <ItemCard key={i.id} itemData={i} />;
         })}
-      </FlexContainer>
+      </SectionLayout>
     </>
   );
 }
