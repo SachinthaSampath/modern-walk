@@ -1,9 +1,19 @@
 import React from "react";
 import H2 from "../../atoms/typography/H2/H2";
 import "./ItemCard.css";
-
-export default function ItemCard(props) {
-  const { title, price, image, id, description, category } = props.itemData;
+type ItemData = {
+  title: string;
+  price: string;
+  image: string;
+  id: number;
+  description: string;
+  category: string;
+};
+type Props = {
+  itemData: ItemData;
+};
+export default function ItemCard({ itemData }: Props) {
+  const { title, price, image, id, description, category } = itemData;
 
   return (
     <div className="item-card-container">
