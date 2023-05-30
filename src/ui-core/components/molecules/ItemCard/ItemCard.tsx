@@ -13,7 +13,7 @@ type Props = {
   itemData: ItemData;
 };
 export default function ItemCard({ itemData }: Props) {
-  const { title, price, image, id, description, category } = itemData;
+  const { title, price, image, description, category } = itemData;
 
   return (
     <div className="item-card-container">
