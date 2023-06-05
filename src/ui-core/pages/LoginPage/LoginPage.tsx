@@ -9,11 +9,13 @@ const LoginPage = () => {
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
     if (!uname.trim()) {
-      alert("Please enter valid username!");
+      // alert("Please enter valid username!");
+      document.getElementById("uname")?.focus();
       return;
     }
     if (!password) {
-      alert("Please enter valid password!");
+      // alert("Please enter valid password!");
+      document.getElementById("psw")?.focus();
       return;
     }
     console.log(uname, password);
@@ -28,6 +30,7 @@ const LoginPage = () => {
               <b>User Name</b>
             </label>
             <input
+              autoFocus
               value={uname}
               onChange={(e) => setUname(e.target.value)}
               type="text"
