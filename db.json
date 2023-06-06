@@ -41043,7 +41043,7 @@
     {
       "name": "Sachintha Sampath",
       "username": "ss",
-      "password":"123",
+      "password": "123",
       "email": "sachintha.wireapps@gmail.com",
       "address": {
         "street": "123",
@@ -41055,6 +41055,29 @@
         }
       },
       "id": 11
+    },
+    {
+      "params": {
+        "name": "sdf",
+        "username": "ssgg",
+        "password": "123",
+        "email": "sdf@gmail.com"
+      },
+      "id": 12
+    },
+    {
+      "name": "sdf",
+      "username": "ssgg",
+      "password": "123",
+      "email": "sdf@gmail.com",
+      "id": 13
+    },
+    {
+      "name": "admin",
+      "username": "admin",
+      "password": "123",
+      "email": "admin@gmail.com",
+      "id": 14
     }
   ]
 }
