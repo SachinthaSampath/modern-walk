@@ -3,6 +3,19 @@ import Header from "../../components/molecules/Header/Header";
 import ItemCard from "../../components/molecules/ItemCard/ItemCard";
 import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
 
+type Item = {
+  id: number;
+  title: string;
+  price: string;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}; 
+
 export default function WomensClothing() {
   const [items, setItems] = useState([]);
 
@@ -18,7 +31,7 @@ export default function WomensClothing() {
     <>
       <Header headingText="Modern Walk" />
       <SectionLayout heading={"Women's Clothing"}>
-        {items.map((i) => {
+        {items.map((i:Item) => {
           return <ItemCard key={i.id} itemData={i} />;
         })}
       </SectionLayout>
