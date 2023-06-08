@@ -3,12 +3,12 @@ import "./CategoryCard.css";
 import { Link } from "react-router-dom";
 import H1 from '../../atoms/typography/H1/H1';
 
-type Props={
+type CategoryCardProps={
   name:string,
   page:string
 }
 
-export default function CategoryCard({ name, page }:Props) {
+export default function CategoryCard({ name, page }:CategoryCardProps) {
   
   return (
     <div className="category-card-container">

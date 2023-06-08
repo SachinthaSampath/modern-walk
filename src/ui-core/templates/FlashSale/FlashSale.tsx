@@ -14,12 +14,11 @@ type Item = {
     count: number;
   };
 };
-type Props = {
+type FlashSaleProps = {
   flashItems: Item[];
 };
 
-export default function FlashSale({ flashItems }:Props) {
-  console.log(flashItems);
+export default function FlashSale({ flashItems }:FlashSaleProps) {
   return (
     <div className="flash-sale-container">
       <SectionLayout heading={"Flash Sale"}>

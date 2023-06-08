@@ -9,10 +9,10 @@ type ItemData = {
   description: string;
   category: string;
 };
-type Props = {
+type ItemCardProps = {
   itemData: ItemData;
 };
-export default function ItemCard({ itemData }: Props) {
+export default function ItemCard({ itemData }: ItemCardProps) {
   const { title, price, image, description, category } = itemData;
 
   return (
