@@ -3,23 +3,31 @@ import Header from "../../components/molecules/Header/Header";
 import FlashSale from "../../templates/FlashSale/FlashSale";
 import Category from "../../templates/Category/Category";
 import { useEffect, useState } from "react";
+import { Item } from "../../../types/Item";
+
+import axios from "axios";
 
 export default function HomePage() {
-  const [flashItems, setFlashItems] = useState([]);
+
+  //useState to hold item data
+  const [flashItems, setFlashItems] = useState<Item[] | undefined>(undefined);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          "https://fakestoreapi.com/products?limit=5"
-        );
-        const jsonData = await response.json();
-        setFlashItems(jsonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-    fetchData();
+    //will run only on first render onMount
+    axios({
+      method: "GET",
+      url: "https://fakestoreapi.com/products",
+      data: {
+        limit: 5,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setFlashItems(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (

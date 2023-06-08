@@ -2,27 +2,17 @@ import React from "react";
 import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
 
 import ItemCard from "../../components/molecules/ItemCard/ItemCard";
-type Item = {
-  id: number;
-  title: string;
-  price: string;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-};
+import { Item } from "../../../types/Item";
+
 type FlashSaleProps = {
-  flashItems: Item[];
+  flashItems: Item[] | undefined;
 };
 
-export default function FlashSale({ flashItems }:FlashSaleProps) {
+export default function FlashSale({ flashItems }: FlashSaleProps) {
   return (
     <div className="flash-sale-container">
       <SectionLayout heading={"Flash Sale"}>
-        {flashItems.map((fi) => {
+        {flashItems?.map((fi) => {
           return <ItemCard key={fi.id} itemData={fi} />;
         })}
       </SectionLayout>

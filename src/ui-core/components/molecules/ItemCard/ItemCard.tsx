@@ -1,16 +1,10 @@
 import React from "react";
 import H2 from "../../atoms/typography/H2/H2";
 import "./ItemCard.css";
-type ItemData = {
-  title: string;
-  price: string;
-  image: string;
-  id: number;
-  description: string;
-  category: string;
-};
+import { Item } from "../../../../types/Item";
+
 type ItemCardProps = {
-  itemData: ItemData;
+  itemData: Item;
 };
 export default function ItemCard({ itemData }: ItemCardProps) {
   const { title, price, image, description, category } = itemData;
