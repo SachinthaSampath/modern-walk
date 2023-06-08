@@ -8,7 +8,6 @@ import { Item } from "../../../types/Item";
 import axios from "axios";
 
 export default function HomePage() {
-
   //useState to hold item data
   const [flashItems, setFlashItems] = useState<Item[] | undefined>(undefined);
 
@@ -16,10 +15,7 @@ export default function HomePage() {
     //will run only on first render onMount
     axios({
       method: "GET",
-      url: "https://fakestoreapi.com/products",
-      data: {
-        limit: 5,
-      },
+      url: "https://fakestoreapi.com/products?limit=6",
     })
       .then((res) => {
         console.log(res.data);
