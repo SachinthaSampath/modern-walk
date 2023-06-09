@@ -88,7 +88,7 @@ const SignUpPage = () => {
   const showValidSignUp = () => {
     alert("Sign up success!");
     //redirect to login page
-    window.location.href = " http://localhost:3000/login";
+    window.location.href = " http://localhost:3000";
   };
 
   return (
