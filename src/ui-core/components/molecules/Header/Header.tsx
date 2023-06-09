@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import H1 from "../../atoms/typography/H1/H1";
 import "./Header.css";
+import { UserContext } from "../../../../contexts/UserContext";
 
-type HeaderProps={
-  headingText:string
-}
+type HeaderProps = {
+  headingText: string;
+};
 
-export default function Header({headingText}:HeaderProps) {
+export default function Header({ headingText }: HeaderProps) {
+
+  const user = useContext(UserContext);
+
   return (
     <div className="main-heading-container">
       <Link to="/">

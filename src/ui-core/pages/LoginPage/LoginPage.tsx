@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./LoginPage.css";
 import axios from "axios";
+import { UserContext } from "../../../contexts/UserContext";
 
 const LoginPage = () => {
   //set state
   const [uname, setUname] = useState("");
   const [password, setPassword] = useState("");
+
+  //useContext
+  const { user, setUser } = useContext(UserContext);
 
   //function to handle form submission
   const submitForm = (e: React.FormEvent) => {
@@ -26,7 +30,6 @@ const LoginPage = () => {
       el?.focus();
       return;
     }
-    // console.log(uname, password);
 
     //send request to JSON Server and find user with the username
     axios
@@ -38,9 +41,17 @@ const LoginPage = () => {
       .then((response) => {
         // console.log(response);
         if (response.data.length) {
+          let user = response.data[0];
           //validate password
-          let received_psw = response.data[0].password;
+          let received_psw = user.password;
           if (received_psw === password) {
+            //update state
+            setUser({
+              name: user.name,
+              email: user.email,
+              username: user.username,
+              isLoggedIn: true,
+            });
             showValidLogin();
           } else {
             showInvalidLogin();
@@ -70,8 +81,6 @@ const LoginPage = () => {
     alert("Login success!");
     //save login status
     window.localStorage.loggedIn = true;
-    //redirect to shopping cart on login success
-    window.location.href = " http://localhost:3000/shoppingcart";
   };
 
   return (
