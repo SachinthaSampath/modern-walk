@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./SignUpPage.css";
 import axios from "axios";
+import { createUser } from "../../../services/user.service";
 
 const SignUpPage = () => {
   //set state
@@ -54,29 +55,19 @@ const SignUpPage = () => {
     // console.log(name, email, uname, password, rePassword);
 
     //send request to JSON Server and find user with the username
-    axios
-      .post("http://localhost:5000/users", {
-        name: name,
-        username: uname,
-        password: password,
-        email: email,
-      })
-      .then((response) => {
-        console.log(response.status);
-
-        //created
-        if (response.status === 201) {
-          showValidSignUp();
-        } else {
-          showInvalidSignUp();
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        // console.log("finally");
-      });
+    (async () => {
+      try {
+        let result = await createUser({
+          name: name,
+          username: uname,
+          password: password,
+          email: email,
+        });
+        showValidSignUp();
+      } catch (error) {
+        showInvalidSignUp();
+      }
+    })();
   };
 
   //show invalid sign up status

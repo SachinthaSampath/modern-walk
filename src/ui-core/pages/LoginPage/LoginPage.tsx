@@ -1,13 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./LoginPage.css";
-import axios from "axios";
 import { UserContext } from "../../../contexts/UserContext";
-import {
-  cancelTokenSource,
-  fetchAllUsers,
-  fetchUser,
-  seachUser,
-} from "../../../api/api";
+import { seachUser } from "../../../services/user.service";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -16,7 +10,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   //useContext
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   //navigation
   const navigate = useNavigate();
@@ -43,6 +37,7 @@ const LoginPage = () => {
 
     //login using api
     const loginUser = async () => {
+      //add trycatch when caling external api ******
       const users = await seachUser({ username: uname, password: password });
       if (users.length) {
         let valid_user = users[0];

@@ -7,6 +7,10 @@ import { Item } from "../../../types/Item";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
+import {
+  getFlashSaleProducts,
+  getWomentsProducts,
+} from "../../../services/product.service";
 
 export default function WomensClothing() {
   //validate user
@@ -19,16 +23,12 @@ export default function WomensClothing() {
   const [items, setItems] = useState<Item[] | undefined>(undefined);
 
   useEffect(() => {
-    axios({
-      method: "GET",
-      url: "https://fakestoreapi.com/products/category/women's clothing",
-    })
-      .then((res) => {
-        setItems(res.data);
-      })
-      .catch((er) => {
-        console.log(er);
-      });
+    //get flash sale items when page loads
+    (async () => {
+      let items = await getWomentsProducts();
+      console.log(items);
+      setItems(items);
+    })();
   }, []);
 
   return (

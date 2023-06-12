@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import { UserContext } from "../../../contexts/UserContext";
+import { getFlashSaleProducts } from "../../../services/product.service";
 
 export default function HomePage() {
   //validate user
@@ -20,23 +21,14 @@ export default function HomePage() {
   //useState to hold item data
   const [flashItems, setFlashItems] = useState<Item[] | undefined>(undefined);
 
-  //userContest
-
   useEffect(() => {
-    //will run only on first render onMount
-    axios({
-      method: "GET",
-      url: "https://fakestoreapi.com/products?limit=6",
-    })
-      .then((res) => {
-        console.log(res.data);
-        setFlashItems(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //get flash sale items when page loads
+    (async () => {
+      let items = await getFlashSaleProducts();
+      console.log(items);
+      setFlashItems(items);
+    })();
   }, []);
-  console.log(user);
 
   return (
     <div className="home-page-container">

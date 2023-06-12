@@ -1,22 +1,6 @@
-import axios from "axios";
-import { User } from "../types/User";
 import { FetchUserType } from "../types/FetchUserType";
-
-const API_BASE_URL = "http://localhost:5000";
-const AUTH_TOKEN = "d2lyZWFwcHMK";
-export const cancelTokenSource = axios.CancelToken.source();
-
-const apiClient = axios.create({
-  //URL of API
-  baseURL: API_BASE_URL,
-  cancelToken: cancelTokenSource.token,
-  //timeout in milliseconds
-  timeout: 5000,
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${AUTH_TOKEN}`,
-  },
-});
+import { apiClient } from "./api.service";
+import { APIError } from "../models/APIError";
 
 // function to get all users
 export const fetchAllUsers = async () => {
@@ -48,15 +32,25 @@ export const fetchUser = async (userId: number) => {
 
 //function to find user with username
 export const seachUser = async (searchData: Partial<FetchUserType>) => {
-  //build the search query
-  let entries = Object.entries(searchData);
-  let q = "?";
-  entries.forEach((el) => {
-    q += el[0] + "=" + el[1] + "&";
-  });
-  //send request
-  let response = await apiClient.get("/users" + q);
-  return response.data;
+  try {
+    //build the search query
+    let entries = Object.entries(searchData);
+    let q = "?";
+    entries.forEach((el) => {
+      q += el[0] + "=" + el[1] + "&";
+    });
+
+    //send request
+    let response = await apiClient.get("/users" + q);
+
+    return response.data;
+  } catch (error: any) {
+    throw new APIError(
+      error?.response?.data?.message ||
+        "An error occured while searching the user",
+      error.response.status
+    );
+  }
 };
 
 //function to create user

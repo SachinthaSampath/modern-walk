@@ -7,6 +7,7 @@ import { Item } from "../../../types/Item";
 import axios from "axios";
 import { UserContext } from "../../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import { getMentsProducts } from "../../../services/product.service";
 
 export default function MensClothing() {
   //validate user
@@ -20,18 +21,12 @@ export default function MensClothing() {
   const [items, setItems] = useState<Item[] | undefined>(undefined);
 
   useEffect(() => {
-    //run on first render (componentsDidMount)
-    axios({
-      method: "GET",
-      url: "https://fakestoreapi.com/products/category/men's clothing",
-      data: {},
-    })
-      .then((res) => {
-        setItems(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //get flash sale items when page loads
+    (async () => {
+      let items = await getMentsProducts();
+      console.log(items);
+      setItems(items);
+    })();
   }, []);
 
   return (
