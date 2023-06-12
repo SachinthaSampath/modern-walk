@@ -12,30 +12,30 @@ import { UserContext } from "./contexts/UserContext";
 function App() {
   const { user } = useContext(UserContext);
 
-  if (user?.isLoggedIn) {
-    return (
-      <div className="main-container">
-        <Router>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/mens" element={<MensClothing />} />
-            <Route path="/womens" element={<WomensClothing />} /> 
-          </Routes>
-        </Router>
-      </div>
-    );
-  } else {
-    return (
-      <div className="main-container">
-        <Router>
-          <Routes>
-            <Route path="/" element={<LoginPage />} /> 
-            <Route path="/signup" element={<SignUpPage />} />
-          </Routes>
-        </Router>
-      </div>
-    );
-  }
+  return (
+    <div className="main-container">
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/mens" element={<MensClothing />} />
+          <Route path="/womens" element={<WomensClothing />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+        </Routes>
+      </Router>
+    </div>
+  );
+  //   if (user?.isLoggedIn) {
+  // } else {
+  //   return (
+  //     <div className="main-container">
+  //       <Router>
+  //         <Routes>
+
+  //         </Routes>
+  //       </Router>
+  //     </div>
+  //   );
 }
 
 export default App;

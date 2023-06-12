@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import "./LoginPage.css";
 import axios from "axios";
 import { UserContext } from "../../../contexts/UserContext";
+import { fetchAllUsers, fetchUser, seachUser } from "../../../api/api";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   //set state
@@ -10,6 +12,9 @@ const LoginPage = () => {
 
   //useContext
   const { user, setUser } = useContext(UserContext);
+
+  //navigation
+  const navigate = useNavigate();
 
   //function to handle form submission
   const submitForm = (e: React.FormEvent) => {
@@ -31,41 +36,20 @@ const LoginPage = () => {
       return;
     }
 
-    //send request to JSON Server and find user with the username
-    axios
-      .get("http://localhost:5000/users", {
-        params: {
-          username: uname,
-        },
-      })
-      .then((response) => {
-        // console.log(response);
-        if (response.data.length) {
-          let user = response.data[0];
-          //validate password
-          let received_psw = user.password;
-          if (received_psw === password) {
-            //update state
-            setUser({
-              name: user.name,
-              email: user.email,
-              username: user.username,
-              isLoggedIn: true,
-            });
-            showValidLogin();
-          } else {
-            showInvalidLogin();
-          }
-        } else {
-          showInvalidLogin();
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        // console.log("finally");
-      });
+    //login using api
+    const loginUser = async () => {
+      const user = await seachUser({ username: uname, password: password });
+      if (user.length) {
+        //login success
+        showValidLogin();
+        navigate("/");
+      } else {
+        //login fail
+        showInvalidLogin();
+      }
+    };
+
+    loginUser();
   };
 
   //show invalid login status
