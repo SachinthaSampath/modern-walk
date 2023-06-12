@@ -3,14 +3,18 @@ import { User } from "../types/User";
 import { FetchUserType } from "../types/FetchUserType";
 
 const API_BASE_URL = "http://localhost:5000";
+const AUTH_TOKEN = "d2lyZWFwcHMK";
+export const cancelTokenSource = axios.CancelToken.source();
 
 const apiClient = axios.create({
   //URL of API
   baseURL: API_BASE_URL,
+  cancelToken: cancelTokenSource.token,
   //timeout in milliseconds
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${AUTH_TOKEN}`,
   },
 });
 
@@ -19,10 +23,11 @@ export const fetchAllUsers = async () => {
   try {
     const response = await apiClient.get("/users");
     return response.data;
-  } catch (error:any) {
-    throw new Error(
+  } catch (error: any) {
+    throw new APIError(
       error.response?.data?.message ||
-        "An error occured while fetching user data!"
+        "An error occured while fetching user data!",
+      error.response.status
     );
   }
 };
@@ -33,9 +38,10 @@ export const fetchUser = async (userId: number) => {
     const response = await apiClient.get(`/users/${userId}`);
     return response.data;
   } catch (error: unknown | Error | any) {
-    throw new Error(
+    throw new APIError(
       error.response?.data?.message ||
-        "An error occured while fetching user data!"
+        "An error occured while fetching user data!",
+      error.response.status
     );
   }
 };
@@ -59,9 +65,10 @@ export const createUser = async (userData: FetchUserType) => {
     const response = await apiClient.post("/users", userData);
     return response.data;
   } catch (error: any) {
-    throw new Error(
+    throw new APIError(
       error.response?.data?.message ||
-        "An error occured while creating the user"
+        "An error occured while creating the user",
+      error.response.status
     );
   }
 };

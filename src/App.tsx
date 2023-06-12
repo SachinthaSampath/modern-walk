@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./ui-core/pages/HomePage/HomePage";
 import MensClothing from "./ui-core/pages/MensClothing/MensClothing";
@@ -8,9 +8,18 @@ import SignUpPage from "./ui-core/pages/SignUpPage/SignUpPage";
 
 import "./App.css";
 import { UserContext } from "./contexts/UserContext";
+import { cancelTokenSource } from "./api/api";
 
 function App() {
   const { user } = useContext(UserContext);
+
+  //cancell axios calls
+  // useEffect(() => {
+  //   //execute when component unmount
+  //   return () => {
+  //    //cancelTokenSource.cancel("Component unmounted");
+  //   };
+  // }, []);
 
   return (
     <div className="main-container">
