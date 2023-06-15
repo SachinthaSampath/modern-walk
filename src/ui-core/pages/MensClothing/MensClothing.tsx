@@ -4,10 +4,9 @@ import ItemCard from "../../components/molecules/ItemCard/ItemCard";
 import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
 
 import { Item } from "../../../types/Item";
-import axios from "axios";
 import { UserContext } from "../../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
-import { getMentsProducts } from "../../../services/product.service";
+import { useMensProducst } from "../../../services/api.service.rq";
 
 export default function MensClothing() {
   //validate user
@@ -17,17 +16,9 @@ export default function MensClothing() {
     navigate("/login");
   }
 
-  //state to hold items
-  const [items, setItems] = useState<Item[] | undefined>(undefined);
-
-  useEffect(() => {
-    //get flash sale items when page loads
-    (async () => {
-      let items = await getMentsProducts();
-      console.log(items);
-      setItems(items);
-    })();
-  }, []);
+  //use api service to get mens products thrugh react query
+  const { data, isLoading, error } = useMensProducst();
+  const items = data;
 
   return (
     <>

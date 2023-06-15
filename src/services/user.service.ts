@@ -41,7 +41,7 @@ export const seachUser = async (searchData: Partial<FetchUserType>) => {
     });
 
     //send request
-    let response = await apiClient.get("/users" + q);
+    let response = await apiClient.get("/users" + q);    
 
     return response.data;
   } catch (error: any) {

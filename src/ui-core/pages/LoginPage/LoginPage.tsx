@@ -39,6 +39,7 @@ const LoginPage = () => {
     const loginUser = async () => {
       //add trycatch when caling external api ******
       const users = await seachUser({ username: uname, password: password });
+
       if (users.length) {
         let valid_user = users[0];
         //login success

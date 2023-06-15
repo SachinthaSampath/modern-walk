@@ -1,16 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import Header from "../../components/molecules/Header/Header";
 import ItemCard from "../../components/molecules/ItemCard/ItemCard";
 import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
 
-import { Item } from "../../../types/Item";
-import axios from "axios";
+import { Item } from "../../../types/Item"; 
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../../contexts/UserContext";
-import {
-  getFlashSaleProducts,
-  getWomentsProducts,
-} from "../../../services/product.service";
+import { UserContext } from "../../../contexts/UserContext"; 
+import { useWoensProducst } from "../../../services/api.service.rq";
 
 export default function WomensClothing() {
   //validate user
@@ -20,16 +16,8 @@ export default function WomensClothing() {
     navigate("/login");
   }
 
-  const [items, setItems] = useState<Item[] | undefined>(undefined);
-
-  useEffect(() => {
-    //get flash sale items when page loads
-    (async () => {
-      let items = await getWomentsProducts();
-      console.log(items);
-      setItems(items);
-    })();
-  }, []);
+  const { data, isLoading, error } = useWoensProducst();
+  const items = data; 
 
   return (
     <>
