@@ -1,33 +1,50 @@
-import axios from "axios";
-
-// const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-// const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN;
+import { useQuery } from "@tanstack/react-query";
 const API_BASE_URL = "https://equinox-salt-addition.glitch.me";
-const AUTH_TOKEN = "d2lyZWFwcHMK";
-// console.log(API_BASE_URL);
-// console.log(AUTH_TOKEN);
 
-// REACT_APP_API_BASE_URL = "http://localhost:5000";
-// REACT_APP_AUTH_TOKEN = "d2lyZWFwcHMK";
+const endpointsProducts = {
+  mens: "/products?category=men's clothing",
+  womens: "/products?category=women's clothing",
+  flash: "/products?_sort=title&_order=desc&_limit=8",
+};
 
-export const cancelTokenSource = axios.CancelToken.source();
 
-export const apiClient = axios.create({
-  //URL of API
-  baseURL: API_BASE_URL,
-  cancelToken: cancelTokenSource.token,
-  //timeout in milliseconds
-  timeout: 5000,
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${AUTH_TOKEN}`,
-  },
-});
+export function useFindUser({
+  username,
+  password,
+}: {
+  username: string;
+  password: string;
+}) {
+  return useQuery([username, password], () => {
+    return fetch(
+      `${API_BASE_URL}?username=${username}&password=${password}`
+    ).then((res) => res.json());
+  });
+}
 
-export const productApiClient = axios.create({
-  baseURL: "https://equinox-salt-addition.glitch.me",
-  timeout: 5000,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+function getMensProducts() {
+  return fetch(API_BASE_URL + endpointsProducts.mens).then((res) =>
+    res.json()
+  );
+}
+export function useMensProducts() {
+  return useQuery(["mens"], getMensProducts);
+}
+
+function getWomensProducts() {
+  return fetch(API_BASE_URL + endpointsProducts.womens).then((res) =>
+    res.json()
+  );
+}
+export function useWoensProducts() {
+  return useQuery(["womens"], getWomensProducts);
+}
+
+function getFlashSaleProducts() {
+  return fetch(API_BASE_URL + endpointsProducts.flash).then((res) =>
+    res.json()
+  );
+}
+export function useFlashSaleProducts() {
+  return useQuery(["flash"], getFlashSaleProducts);
+}

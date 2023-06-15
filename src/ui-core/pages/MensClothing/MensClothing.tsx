@@ -1,4 +1,3 @@
-import React, { useContext, useEffect, useState } from "react";
 import Header from "../../components/molecules/Header/Header";
 import ItemCard from "../../components/molecules/ItemCard/ItemCard";
 import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
@@ -6,7 +5,7 @@ import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
 import { Item } from "../../../types/Item";
 import { useUser } from "../../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
-import { useMensProducst } from "../../../services/api.service.rq";
+import { useMensProducts } from "../../../services/product.service";
 
 export default function MensClothing() {
   //validate user
@@ -17,7 +16,7 @@ export default function MensClothing() {
   }
 
   //use api service to get mens products thrugh react query
-  const { data, isLoading, error } = useMensProducst();
+  const { data } = useMensProducts();
   const items = data;
 
   return (

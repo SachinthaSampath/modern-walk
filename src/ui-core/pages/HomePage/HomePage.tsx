@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
 import Header from "../../components/molecules/Header/Header";
 import FlashSale from "../../templates/FlashSale/FlashSale";
 import Category from "../../templates/Category/Category";
 import { useNavigate } from "react-router-dom";
 
 import { useUser } from "../../../contexts/UserContext";
-import { useFlashSaleProducst } from "../../../services/api.service.rq";
+import { useFlashSaleProducts } from "../../../services/product.service";
 
 export default function HomePage() {
   //validate user
@@ -16,7 +15,7 @@ export default function HomePage() {
   }
 
   //use api service to get flash sale products through react query
-  const { data, isLoading, error } = useFlashSaleProducst();
+  const { data } = useFlashSaleProducts();
 
   return (
     <div className="home-page-container">

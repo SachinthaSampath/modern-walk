@@ -1,8 +1,8 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef } from "react";
 import "./LoginPage.css";
-import { useUpdateUser, useUser } from "../../../contexts/UserContext";
+import { useUpdateUser } from "../../../contexts/UserContext";
 import { seachUser } from "../../../services/user.service";
-import { useHref, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   //set state
@@ -10,7 +10,7 @@ const LoginPage = () => {
   // const [password, setPassword] = useState("");
 
   //use contexts with custom hooks
-  const currentUser = useUser();
+  // const currentUser = useUser();
   const updateUser = useUpdateUser();
 
   //useRef to hold reference to input elements
@@ -25,8 +25,8 @@ const LoginPage = () => {
     e.preventDefault();
 
     //get values from input fields
-    let uname = usernnameRef.current?.value||"";
-    let password = passwordRef.current?.value||"";
+    let uname = usernnameRef.current?.value || "";
+    let password = passwordRef.current?.value || "";
 
     //validate username
     if (!uname.trim()) {
@@ -80,7 +80,7 @@ const LoginPage = () => {
 
   //show valid login status
   const showValidLogin = () => {
-    alert("Login success!");
+    // alert("Login success!");
     //save login status
     window.localStorage.loggedIn = true;
   };
@@ -94,7 +94,7 @@ const LoginPage = () => {
               <b>User Name</b>
             </label>
             <input
-              autoFocus 
+              autoFocus
               ref={usernnameRef}
               type="text"
               name="uname"
@@ -107,7 +107,7 @@ const LoginPage = () => {
             <label>
               <b>Password</b>
             </label>
-            <input 
+            <input
               ref={passwordRef}
               type="password"
               name="psw"

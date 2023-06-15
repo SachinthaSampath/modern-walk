@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SignUpPage.css";
-import axios from "axios";
 import { createUser } from "../../../services/user.service";
+import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   //set state
@@ -10,6 +10,9 @@ const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [rePassword, setRePassword] = useState("");
+
+  //navigation
+  const navigate = useNavigate();
 
   //function to handle form submission
   const submitForm = (e: React.FormEvent) => {
@@ -57,7 +60,7 @@ const SignUpPage = () => {
     //send request to JSON Server and find user with the username
     (async () => {
       try {
-        let result = await createUser({
+        await createUser({
           name: name,
           username: uname,
           password: password,
@@ -79,7 +82,7 @@ const SignUpPage = () => {
   const showValidSignUp = () => {
     alert("Sign up success!");
     //redirect to login page
-    window.location.href = " http://localhost:3000";
+    navigate("/login");
   };
 
   return (

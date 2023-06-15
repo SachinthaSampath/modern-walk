@@ -1,5 +1,5 @@
 import { FetchUserType } from "../types/FetchUserType";
-import { apiClient } from "./api.service";
+import { apiClient } from "./api.service.axios";
 import { APIError } from "../models/APIError";
 
 // function to get all users
