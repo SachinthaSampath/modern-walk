@@ -1,16 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./LoginPage.css";
-import { UserContext } from "../../../contexts/UserContext";
+import { useUpdateUser, useUser } from "../../../contexts/UserContext";
 import { seachUser } from "../../../services/user.service";
-import { useNavigate } from "react-router-dom";
+import { useHref, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   //set state
-  const [uname, setUname] = useState("");
-  const [password, setPassword] = useState("");
+  // const [uname, setUname] = useState("");
+  // const [password, setPassword] = useState("");
 
-  //useContext
-  const { setUser } = useContext(UserContext);
+  //use contexts with custom hooks
+  const currentUser = useUser();
+  const updateUser = useUpdateUser();
+
+  //useRef to hold reference to input elements
+  const usernnameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   //navigation
   const navigate = useNavigate();
@@ -18,6 +23,10 @@ const LoginPage = () => {
   //function to handle form submission
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
+
+    //get values from input fields
+    let uname = usernnameRef.current?.value||"";
+    let password = passwordRef.current?.value||"";
 
     //validate username
     if (!uname.trim()) {
@@ -35,7 +44,7 @@ const LoginPage = () => {
       return;
     }
 
-    //login using api
+    //find user using api
     const loginUser = async () => {
       //add trycatch when caling external api ******
       const users = await seachUser({ username: uname, password: password });
@@ -45,7 +54,7 @@ const LoginPage = () => {
         //login success
         showValidLogin();
         //set user details
-        setUser({
+        updateUser({
           email: valid_user.email,
           name: valid_user.name,
           username: valid_user.username,
@@ -85,9 +94,8 @@ const LoginPage = () => {
               <b>User Name</b>
             </label>
             <input
-              autoFocus
-              value={uname}
-              onChange={(e) => setUname(e.target.value)}
+              autoFocus 
+              ref={usernnameRef}
               type="text"
               name="uname"
               id="uname"
@@ -99,9 +107,8 @@ const LoginPage = () => {
             <label>
               <b>Password</b>
             </label>
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+            <input 
+              ref={passwordRef}
               type="password"
               name="psw"
               id="psw"

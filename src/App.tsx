@@ -8,16 +8,15 @@ import SignUpPage from "./ui-core/pages/SignUpPage/SignUpPage";
 
 import "./App.css";
 import UserProvider from "./contexts/UserContext";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; 
 
 function App() {
   const queryClient = new QueryClient();
-  console.log(process.env.REACT_APP_API_BASE_URL);
 
   return (
     <QueryClientProvider client={queryClient}>
       <UserProvider>
-        <div className="main-container">
+        <div className="main-container">        
           <Router>
             <Routes>
               <Route path="/" element={<HomePage />} />

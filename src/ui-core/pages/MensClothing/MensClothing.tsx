@@ -4,13 +4,13 @@ import ItemCard from "../../components/molecules/ItemCard/ItemCard";
 import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
 
 import { Item } from "../../../types/Item";
-import { UserContext } from "../../../contexts/UserContext";
+import { useUser } from "../../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { useMensProducst } from "../../../services/api.service.rq";
 
 export default function MensClothing() {
   //validate user
-  const { user } = useContext(UserContext);
+  const user = useUser();
   const navigate = useNavigate();
   if (!user?.isLoggedIn) {
     navigate("/login");
