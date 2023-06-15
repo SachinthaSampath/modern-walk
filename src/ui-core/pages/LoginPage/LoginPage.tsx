@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import "./LoginPage.css";
 import { useUpdateUser } from "../../../contexts/UserContext";
 import { seachUser } from "../../../services/user.service";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   //set state
@@ -89,35 +89,47 @@ const LoginPage = () => {
     <div className="login-container">
       <div className="login">
         <form id="form-login" onSubmit={submitForm}>
-          <p>
-            <label>
-              <b>User Name</b>
-            </label>
-            <input
-              autoFocus
-              ref={usernnameRef}
-              type="text"
-              name="uname"
-              id="uname"
-              placeholder="Username"
-            />
-          </p>
+          <div className="form-login-input-group">
+            <div className="form-login-input-label">
+              {" "}
+              <label>
+                <b>User Name</b>
+              </label>
+            </div>
+            <div className="form-login-input">
+              <input
+                autoFocus
+                ref={usernnameRef}
+                type="text"
+                name="uname"
+                id="uname"
+                placeholder="Username"
+              />
+            </div>
+          </div>
+          <div className="form-login-input-group">
+            <div className="form-login-input-label">
+              {" "}
+              <label>
+                <b>Password</b>
+              </label>
+            </div>
+            <div className="form-login-input">
+              <input
+                ref={passwordRef}
+                type="password"
+                name="psw"
+                id="psw"
+                placeholder="Password"
+              />
+            </div>
+          </div>
 
-          <p>
-            <label>
-              <b>Password</b>
-            </label>
-            <input
-              ref={passwordRef}
-              type="password"
-              name="psw"
-              id="psw"
-              placeholder="Password"
-            />
-          </p>
-
-          <p>
+          <p className="btn-container">
             <input type="submit" name="login" id="login" value="Login" />
+            <button className="btn-sign-up">
+              <Link to="/signup">SignUp</Link>
+            </button>
           </p>
         </form>
       </div>

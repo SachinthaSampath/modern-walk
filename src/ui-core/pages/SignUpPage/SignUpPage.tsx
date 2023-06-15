@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SignUpPage.css";
 import { createUser } from "../../../services/user.service";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   //set state
@@ -89,79 +89,102 @@ const SignUpPage = () => {
     <div className="sign-up-container">
       <div className="sign-up">
         <form id="form-sign-up" onSubmit={submitForm}>
-          <p>
-            <label>
-              <b>Name</b>
-            </label>
-            <input
-              autoFocus
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Name"
-            />
-          </p>
+          
+          <div className="form-sign-up-input-group">
+            <div className="form-sign-up-input-label">
+              <label>
+                <b>Name</b>
+              </label>
+            </div>
+            <div className="form-sign-up-input">
+              <input
+                autoFocus
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Name"
+              />
+            </div>
+          </div>
+          <div className="form-sign-up-input-group">
+            <div className="form-sign-up-input-label">
+              <label>
+                <b>Email</b>
+              </label>
+            </div>
+            <div className="form-sign-up-input">
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Email"
+              />
+            </div>
+          </div>
+          <div className="form-sign-up-input-group">
+            <div className="form-sign-up-input-label">
+              {" "}
+              <label>
+                <b>User Name</b>
+              </label>
+            </div>
+            <div className="form-sign-up-input">
+              <input
+                value={uname}
+                onChange={(e) => setUname(e.target.value)}
+                type="text"
+                name="uname"
+                id="uname"
+                placeholder="Username"
+              />
+            </div>
+          </div>
+          <div className="form-sign-up-input-group">
+            <div className="form-sign-up-input-label">
+              <label>
+                <b>Password</b>
+              </label>
+            </div>
+            <div className="form-sign-up-input">
+              {" "}
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                name="psw"
+                id="psw"
+                placeholder="Password"
+              />
+            </div>
+          </div>
+          <div className="form-sign-up-input-group">
+            <div className="form-sign-up-input-label">
+              <label>
+                <b>Confirm Password</b>
+              </label>
+            </div>
+            <div className="form-sign-up-input">
+              {" "}
+              <input
+                value={rePassword}
+                onChange={(e) => setRePassword(e.target.value)}
+                type="password"
+                name="repsw"
+                id="repsw"
+                placeholder="Confirm Password"
+              />
+            </div>
+          </div>
 
-          <p>
-            <label>
-              <b>Email</b>
-            </label>
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="text"
-              name="email"
-              id="email"
-              placeholder="Email"
-            />
-          </p>
-
-          <p>
-            <label>
-              <b>User Name</b>
-            </label>
-            <input
-              value={uname}
-              onChange={(e) => setUname(e.target.value)}
-              type="text"
-              name="uname"
-              id="uname"
-              placeholder="Username"
-            />
-          </p>
-
-          <p>
-            <label>
-              <b>Password</b>
-            </label>
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              name="psw"
-              id="psw"
-              placeholder="Password"
-            />
-          </p>
-
-          <p>
-            <label>
-              <b>Confirm Password</b>
-            </label>
-            <input
-              value={rePassword}
-              onChange={(e) => setRePassword(e.target.value)}
-              type="password"
-              name="repsw"
-              id="repsw"
-              placeholder="Confirm Password"
-            />
-          </p>
-
-          <p>
+          <p className="btn-container">
             <input type="submit" name="sign-up" id="sign-up" value="Sign Up" />
+            <button className="btn-sign-up">
+              <Link to="/login">Login</Link>
+            </button>
           </p>
         </form>
       </div>

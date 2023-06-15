@@ -1,14 +1,12 @@
 .sign-up-container {
   position: absolute;
   margin-left: 50%;
-  left:-271px;
-  margin-top: 10%; 
+  left: -271px;
+  margin-top: 10%;
 }
 
 #form-sign-up {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  padding: 10px;
 }
 
 .sign-up {
@@ -38,4 +36,21 @@
   padding-left: 7px;
   color: blue;
   cursor: pointer;
+}
+
+.form-sign-up-input-group {
+  display: flex;
+  margin-top: 10px;
+}
+.form-sign-up-input-label {
+  width: 140px;
+  display: flex;
+  justify-content: flex-start;
+}
+.form-sign-up-input {
+  width: 50%;
+}
+
+.btn-container{
+  align-items: center;
 }
