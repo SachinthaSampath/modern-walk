@@ -5,11 +5,14 @@ import { useNavigate } from "react-router-dom";
 
 import { useUser } from "../../../contexts/UserContext";
 import { useFlashSaleProducts } from "../../../services/product.service";
+import PageSkeleton from "../../layouts/PageSkeleton";
 
 export default function HomePage() {
   //validate user
+  //seperate component to wrap PageSkeleton and wrap, useEffect to validate user when the props changes
   const user = useUser();
   const navigate = useNavigate();
+
   if (!user?.isLoggedIn) {
     navigate("/login");
   }
@@ -18,10 +21,12 @@ export default function HomePage() {
   const { data } = useFlashSaleProducts();
 
   return (
-    <div className="home-page-container">
-      <Header headingText="Modern Walk" />
-      <FlashSale flashItems={data} />
-      <Category />
-    </div>
+    <PageSkeleton>
+      <div className="home-page-container">
+        <Header headingText="Modern Walk" />
+        <FlashSale flashItems={data} />
+        <Category />
+      </div>
+    </PageSkeleton>
   );
 }

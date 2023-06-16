@@ -5,6 +5,10 @@ import { seachUser } from "../../../services/user.service";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+
+  //remove saved user from the local storage
+  localStorage.removeItem('user');
+
   //set state
   // const [uname, setUname] = useState("");
   // const [password, setPassword] = useState("");
@@ -60,6 +64,10 @@ const LoginPage = () => {
           username: valid_user.username,
           isLoggedIn: true,
         });
+
+        //store in local storage **
+        localStorage.setItem('user',JSON.stringify(valid_user));
+
         navigate("/");
       } else {
         //login fail
