@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { useUpdateUser, useUser } from "../../contexts/UserContext";
-import { User } from "../../types/User";
 
 type PageSkeletonType = {
   children: React.ReactNode;

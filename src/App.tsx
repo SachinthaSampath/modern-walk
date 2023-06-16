@@ -7,7 +7,7 @@ import LoginPage from "./ui-core/pages/LoginPage/LoginPage";
 import SignUpPage from "./ui-core/pages/SignUpPage/SignUpPage";
 
 import "./App.css";
-import UserProvider, { useUpdateUser } from "./contexts/UserContext";
+import { useUpdateUser } from "./contexts/UserContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { User } from "./types/User";
 
@@ -27,7 +27,7 @@ function App() {
         username: valid_user.username,
         isLoggedIn: true,
       });
-    }
+    }    
   }, []);
 
   return (

@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import H1 from "../../atoms/typography/H1/H1";
 import "./Header.css";
@@ -19,8 +18,22 @@ export default function Header({ headingText }: HeaderProps) {
         </Link>
       </div>
       <div className="heading-user-section">
-        <p><img src="/user.png"/> {user?.name}</p>
-        <p><Link to="/login">Logout</Link></p>
+        {user.isLoggedIn ? (
+          <>
+            <p>
+              <img src="/user.png" alt="User icon" /> {user?.name}
+            </p>
+            <p>
+              <Link to="/login">Logout</Link>
+            </p>
+          </>
+        ) : (
+          <>
+            <p>
+              <Link to="/login">Login</Link>
+            </p>
+          </>
+        )}
       </div>
     </div>
   );
