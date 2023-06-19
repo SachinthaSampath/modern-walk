@@ -1,10 +1,8 @@
 import React from "react";
 import "../Typography.css";
+import { H2Props } from "./H2.types";
 
-type H2Props={
-  children:React.ReactNode,
-  className:string
-}
+
 
 export default function H2({ children,className }:H2Props) {
   

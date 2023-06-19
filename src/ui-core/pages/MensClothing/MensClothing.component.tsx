@@ -1,6 +1,6 @@
-import Header from "../../components/molecules/Header/Header";
-import ItemCard from "../../components/molecules/ItemCard/ItemCard";
-import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
+import {Header} from "../../components";
+import {ItemCard} from "../../components";
+import SectionLayout from "../../layouts/SectionLayout/SectionLayout.component";
 
 import { Item } from "../../../types/Item";
 import { useMensProducts } from "../../../services/product.service";

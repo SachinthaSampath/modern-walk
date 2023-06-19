@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomePage from "./ui-core/pages/HomePage/HomePage";
-import MensClothing from "./ui-core/pages/MensClothing/MensClothing";
-import WomensClothing from "./ui-core/pages/WomensClothing/WomensClothing";
-import LoginPage from "./ui-core/pages/LoginPage/LoginPage";
-import SignUpPage from "./ui-core/pages/SignUpPage/SignUpPage";
+import { HomePage } from "./ui-core";
+import { MensClothing } from "./ui-core";
+import { WomensClothing } from "./ui-core";
+import { LoginPage } from "./ui-core";
+import { SignUpPage } from "./ui-core";
 
 import "./App.css";
 import { useUpdateUser } from "./contexts/UserContext";
@@ -27,7 +27,7 @@ function App() {
         username: valid_user.username,
         isLoggedIn: true,
       });
-    }    
+    }
   }, []);
 
   return (

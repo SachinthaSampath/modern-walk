@@ -1,9 +1,7 @@
 import { useUser } from "../../../contexts/UserContext";
+import { ComponentSkeletonProps } from "./ComponentSkeleton.types";
 
-type ComponentSkeletonType = {
-  children: React.ReactNode;
-};
-const ComponentSkeleton = ({ children }: ComponentSkeletonType) => {
+const ComponentSkeleton = ({ children }: ComponentSkeletonProps) => {
   const user = useUser();
   if (!user?.isLoggedIn) {
     return <></>;

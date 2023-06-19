@@ -1,7 +1,7 @@
 import React from "react";
-import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
+import { SectionLayout } from "../../layouts";
 
-import ItemCard from "../../components/molecules/ItemCard/ItemCard";
+import { ItemCard } from "../../components";
 import { Item } from "../../../types/Item";
 
 type FlashSaleProps = {

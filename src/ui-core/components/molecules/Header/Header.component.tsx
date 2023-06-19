@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom";
-import H1 from "../../atoms/typography/H1/H1";
+import { H1 } from "../../atoms";
 import "./Header.css";
 import { useUser } from "../../../../contexts/UserContext";
-
-type HeaderProps = {
-  headingText: string;
-};
+import { HeaderProps } from "./Header.types";
 
 export default function Header({ headingText }: HeaderProps) {
   const user = useUser();

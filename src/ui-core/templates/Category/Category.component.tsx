@@ -1,7 +1,7 @@
 import React from "react";
 import "./Category.css";
-import SectionLayout from "../../layouts/SectionLayout/SectionLayout";
-import CategoryCard from "../../components/molecules/CategoryCard/CategoryCard";
+import {SectionLayout} from "../../layouts";
+import {CategoryCard} from "../../components";
 
 export default function Category() {
   return (
