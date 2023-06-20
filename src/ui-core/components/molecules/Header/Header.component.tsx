@@ -4,7 +4,9 @@ import "./Header.css";
 import { useUser } from "../../../../contexts/UserContext";
 import { HeaderProps } from "./Header.types";
 
-export default function Header({ headingText }: HeaderProps) {
+export default function Header({
+  headingText,
+}: HeaderProps): React.JSX.Element {
   const user = useUser();
 
   return (

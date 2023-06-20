@@ -3,11 +3,11 @@ import "./LoginPage.css";
 import { useUpdateUser } from "../../../contexts/UserContext";
 import { seachUser } from "../../../services/user.service";
 import { Link, useNavigate } from "react-router-dom";
+import { LoginPageProps } from "./LoginPageProps";
 
-const LoginPage = () => {
-
+const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
   //remove saved user from the local storage
-  localStorage.removeItem('user');
+  localStorage.removeItem("user");
 
   //set state
   // const [uname, setUname] = useState("");
@@ -66,7 +66,7 @@ const LoginPage = () => {
         });
 
         //store in local storage **
-        localStorage.setItem('user',JSON.stringify(valid_user));
+        localStorage.setItem("user", JSON.stringify(valid_user));
 
         navigate("/");
       } else {

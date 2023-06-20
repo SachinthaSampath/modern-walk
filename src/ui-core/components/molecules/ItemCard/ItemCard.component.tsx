@@ -4,7 +4,9 @@ import "./ItemCard.css";
 import { Item } from "../../../../types/Item";
 import { ItemCardProps } from "./ItemCard.types";
 
-export default function ItemCard({ itemData }: ItemCardProps) {
+export default function ItemCard({
+  itemData,
+}: ItemCardProps): React.JSX.Element {
   const { title, price, image, description, category } = itemData;
 
   return (

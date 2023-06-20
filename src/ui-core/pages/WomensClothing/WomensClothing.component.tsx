@@ -1,11 +1,11 @@
 import { Header } from "../../components";
 import { ItemCard } from "../../components";
-import {SectionLayout} from "../../layouts";
+import { SectionLayout } from "../../layouts";
 
 import { Item } from "../../../types/Item";
 import { useWoensProducts } from "../../../services/product.service";
 
-export default function WomensClothing() {
+export default function WomensClothing(): React.JSX.Element {
   const { data } = useWoensProducts();
   const items = data;
 
@@ -20,3 +20,5 @@ export default function WomensClothing() {
     </>
   );
 }
+
+

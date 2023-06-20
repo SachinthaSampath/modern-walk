@@ -6,7 +6,7 @@ import { SectionLayoutProps } from "./SectionLayout.types";
 export default function SectionLayout({
   children,
   heading,
-}: SectionLayoutProps) {
+}: SectionLayoutProps): React.JSX.Element {
   return (
     <div className="flex-container">
       <H2 className="flex-container-heading">{heading}</H2>

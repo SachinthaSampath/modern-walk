@@ -1,6 +1,6 @@
 import { ButtonProps } from "./Button.types";
 
-function Button({ children }: ButtonProps) {
+function Button({ children }: ButtonProps):React.JSX.Element {
   return (
     <>
       <button>{children}</button>

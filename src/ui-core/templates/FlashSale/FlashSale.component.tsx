@@ -3,12 +3,11 @@ import { SectionLayout } from "../../layouts";
 
 import { ItemCard } from "../../components";
 import { Item } from "../../../types/Item";
+import { FlashSaleProps } from "./FlashSaleProps";
 
-type FlashSaleProps = {
-  flashItems: Item[] | undefined;
-};
-
-export default function FlashSale({ flashItems }: FlashSaleProps) {
+export default function FlashSale({
+  flashItems,
+}: FlashSaleProps): React.JSX.Element {
   return (
     <div className="flash-sale-container">
       <SectionLayout heading={"Flash Sale"}>

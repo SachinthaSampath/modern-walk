@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./SignUpPage.css";
 import { createUser } from "../../../services/user.service";
 import { Link, useNavigate } from "react-router-dom";
+import { SignUpPageProps } from "./SignUpPageProps";
 
-const SignUpPage = () => {
+const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
   //set state
   const [uname, setUname] = useState("");
   const [password, setPassword] = useState("");
@@ -89,7 +90,6 @@ const SignUpPage = () => {
     <div className="sign-up-container">
       <div className="sign-up">
         <form id="form-sign-up" onSubmit={submitForm}>
-          
           <div className="form-sign-up-input-group">
             <div className="form-sign-up-input-label">
               <label>

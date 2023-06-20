@@ -1,11 +1,11 @@
 import React from "react";
 import "./Category.css";
-import {SectionLayout} from "../../layouts";
-import {CategoryCard} from "../../components";
+import { SectionLayout } from "../../layouts";
+import { CategoryCard } from "../../components";
 
-export default function Category() {
+export default function Category(): React.JSX.Element {
   return (
-    <div className="category-main-container"> 
+    <div className="category-main-container">
       <SectionLayout heading="Categories">
         <CategoryCard name="Men's Clothing" page="mens" />
         <CategoryCard name="Women's Clothing" page="womens" />
