@@ -1,10 +1,10 @@
-import { useUser } from "../../../contexts/UserContext";
+import { useUserContext } from "../../../contexts";
 import { PageSkeletonProps } from "./PageSkeleton.types";
 
 const PageSkeleton: React.FC<PageSkeletonProps> = ({
   children,
 }: PageSkeletonProps): React.JSX.Element => {
-  const user = useUser();
+  const { user } = useUserContext();
   if (!user?.isLoggedIn) {
     return <></>;
   } else {

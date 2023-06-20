@@ -7,13 +7,14 @@ import { LoginPage } from "./ui-core";
 import { SignUpPage } from "./ui-core";
 
 import "./App.css";
-import { useUpdateUser } from "./contexts/UserContext";
+import { useUserContext } from "./contexts/";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { User } from "./types/User";
 
 function App() {
   const queryClient = new QueryClient();
-  const updateUser = useUpdateUser();
+  
+  const { setUser: updateUser } = useUserContext();
 
   //get user from local storage and check when page reload
   useEffect(() => {

@@ -1,8 +1,24 @@
 import React, { useContext } from "react";
 import { createContext, useState } from "react";
 import { User } from "../types/User";
+import { UserCTXProps, UserProviderProps } from "./UserContext.Types";
 
-//default user object
+
+
+//create user context
+const UserContext = createContext<UserCTXProps | null>(null);
+
+//custom hook to access properties from outside easily
+const useUserContext = (): UserCTXProps => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("UserContext must be used within UserContext.Provider");
+  }
+  return { ...context };
+};
+
+
+//default user object to initialize state
 const defaultUser: User = {
   name: "",
   email: "",
@@ -10,26 +26,11 @@ const defaultUser: User = {
   isLoggedIn: false,
 };
 
-//context to provide the user
-const UserContext = createContext<User>(defaultUser);
+//create  user context provider
+const UserProvider: React.FC<UserProviderProps> = ({
+  children,
+}: UserProviderProps) => {
 
-//context to provide user update function
-const UserUpdateContext = createContext<any>(() => {});
-
-//custom hooks to give easy access
-export function useUser() {
-  return useContext(UserContext);
-}
-export function useUpdateUser() {
-  return useContext(UserUpdateContext);
-}
-
-//UserProvider property type definition
-type UserProviderProps = {
-  children: React.ReactNode;
-};
-
-export default function UserProvider({ children }: UserProviderProps) {
   //crate state with default user object
   const [user, setUser] = useState<User>(defaultUser);
 
@@ -40,11 +41,13 @@ export default function UserProvider({ children }: UserProviderProps) {
     });
   };
 
-  return (
-    <UserContext.Provider value={user}>
-      <UserUpdateContext.Provider value={updateUser}>
-        {children}
-      </UserUpdateContext.Provider>
-    </UserContext.Provider>
-  );
-}
+  //data to send with context provider
+  const data = {
+    user,
+    setUser,
+  };
+
+  return <UserContext.Provider value={data}>{children}</UserContext.Provider>;
+};
+
+export {UserProvider,useUserContext};

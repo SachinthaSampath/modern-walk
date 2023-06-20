@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import "./LoginPage.css";
-import { useUpdateUser } from "../../../contexts/UserContext";
+import { useUserContext } from "../../../contexts";
 import { seachUser } from "../../../services/user.service";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginPageProps } from "./LoginPageProps";
@@ -14,8 +14,7 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
   // const [password, setPassword] = useState("");
 
   //use contexts with custom hooks
-  // const currentUser = useUser();
-  const updateUser = useUpdateUser();
+  const { setUser } = useUserContext();
 
   //useRef to hold reference to input elements
   const usernnameRef = useRef<HTMLInputElement>(null);
@@ -58,7 +57,7 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
         //login success
         showValidLogin();
         //set user details
-        updateUser({
+        setUser({
           email: valid_user.email,
           name: valid_user.name,
           username: valid_user.username,

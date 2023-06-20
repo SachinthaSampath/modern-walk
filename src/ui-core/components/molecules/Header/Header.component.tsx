@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { H1 } from "../../atoms";
 import "./Header.css";
-import { useUser } from "../../../../contexts/UserContext";
+import { useUserContext } from "../../../../contexts";
 import { HeaderProps } from "./Header.types";
 
 export default function Header({
   headingText,
 }: HeaderProps): React.JSX.Element {
-  const user = useUser();
+  const {user} = useUserContext();
 
   return (
     <div className="main-heading-container">
