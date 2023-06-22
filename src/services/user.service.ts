@@ -1,6 +1,23 @@
 import { FetchUserType } from "../types/FetchUserType";
-import { apiClient } from "./api.service.axios";
+import { apiClient } from "./apiClient.axios";
 import { APIError } from "../models/APIError";
+import { useQuery } from "@tanstack/react-query";
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+export function useFindUser({
+  username,
+  password,
+}: {
+  username: string;
+  password: string;
+}) {
+  return useQuery([username, password], () => {
+    return fetch(
+      `${API_BASE_URL}?username=${username}&password=${password}`
+    ).then((res) => res.json());
+  });
+}
 
 // function to get all users
 export const fetchAllUsers = async () => {
@@ -41,7 +58,7 @@ export const seachUser = async (searchData: Partial<FetchUserType>) => {
     });
 
     //send request
-    let response = await apiClient.get("/users" + q);    
+    let response = await apiClient.get("/users" + q);
 
     return response.data;
   } catch (error: any) {

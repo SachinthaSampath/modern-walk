@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "./LoginPage.css";
 import { useUserContext } from "../../../contexts";
-import { seachUser } from "../../../services/user.service";
+import { UsersAPI } from "../../../services";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginPageProps } from "./LoginPageProps";
 
@@ -50,7 +50,7 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
     //find user using api
     const loginUser = async () => {
       //add trycatch when caling external api ******
-      const users = await seachUser({ username: uname, password: password });
+      const users = await UsersAPI.seachUser({ username: uname, password: password });
 
       if (users.length) {
         let valid_user = users[0];

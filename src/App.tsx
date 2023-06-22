@@ -8,12 +8,10 @@ import { SignUpPage } from "./ui-core";
 
 import "./App.css";
 import { useUserContext } from "./contexts/";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { User } from "./types/User";
 
 function App() {
-  const queryClient = new QueryClient();
-  
   const { setUser: updateUser } = useUserContext();
 
   //get user from local storage and check when page reload
@@ -32,19 +30,17 @@ function App() {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="main-container">
-        <Router>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/mens" element={<MensClothing />} />
-            <Route path="/womens" element={<WomensClothing />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-          </Routes>
-        </Router>
-      </div>
-    </QueryClientProvider>
+    <div className="main-container">
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/mens" element={<MensClothing />} />
+          <Route path="/womens" element={<WomensClothing />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

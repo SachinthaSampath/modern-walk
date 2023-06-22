@@ -1,20 +1,24 @@
 import { Header } from "../../components";
 import { ItemCard } from "../../components";
 import SectionLayout from "../../layouts/SectionLayout/SectionLayout.component";
+import { ProductsAPI } from "../../../services";
 
 import { Item } from "../../../types/Item";
-import { useMensProducts } from "../../../services/product.service";
+import { useQuery } from "@tanstack/react-query";
 
 export default function MensClothing(): React.JSX.Element {
-  //use api service to get mens products thrugh react query
-  const { data } = useMensProducts();
-  const items = data;
+  
+  //use react query to query data
+  const { data, isLoading, isError } = useQuery(
+    ["mens"],
+    ProductsAPI.getMensProducts
+  );
 
   return (
     <>
       <Header headingText="Modern Walk" />
       <SectionLayout heading={"Men's Clothing"}>
-        {items?.map((i: Item) => {
+        {data?.map((i: Item) => {
           return <ItemCard key={i.id} itemData={i} />;
         })}
       </SectionLayout>
