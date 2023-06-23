@@ -7,7 +7,6 @@ import { Item } from "../../../types/Item";
 import { useQuery } from "@tanstack/react-query";
 
 export default function MensClothing(): React.JSX.Element {
-  
   //use react query to query data
   const { data, isLoading, isError } = useQuery(
     ["mens"],
@@ -18,9 +17,13 @@ export default function MensClothing(): React.JSX.Element {
     <>
       <Header headingText="Modern Walk" />
       <SectionLayout heading={"Men's Clothing"}>
-        {data?.map((i: Item) => {
-          return <ItemCard key={i.id} itemData={i} />;
-        })}
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          data?.map((i: Item) => {
+            return <ItemCard key={i.id} itemData={i} />;
+          })
+        )}
       </SectionLayout>
     </>
   );

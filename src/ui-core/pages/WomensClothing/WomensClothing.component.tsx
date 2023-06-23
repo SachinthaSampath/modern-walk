@@ -7,15 +7,22 @@ import { ProductsAPI } from "../../../services";
 import { useQuery } from "@tanstack/react-query";
 
 export default function WomensClothing(): React.JSX.Element {
-  const { data } = useQuery(["womens"], ProductsAPI.getWomensProducts);
+  const { data, isLoading, isError } = useQuery(
+    ["womens"],
+    ProductsAPI.getWomensProducts
+  );
 
   return (
     <>
       <Header headingText="Modern Walk" />
       <SectionLayout heading={"Women's Clothing"}>
-        {data?.map((i: Item) => {
-          return <ItemCard key={i.id} itemData={i} />;
-        })}
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          data?.map((i: Item) => {
+            return <ItemCard key={i.id} itemData={i} />;
+          })
+        )}
       </SectionLayout>
     </>
   );

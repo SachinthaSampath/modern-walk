@@ -1,5 +1,5 @@
 import { FetchUserType } from "../types/FetchUserType";
-import { apiClient } from "./apiClient.axios";
+import { apiClient } from "./api.service";
 import { APIError } from "../models/APIError";
 import { useQuery } from "@tanstack/react-query";
 

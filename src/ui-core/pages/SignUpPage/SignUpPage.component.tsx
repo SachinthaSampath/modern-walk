@@ -3,6 +3,8 @@ import "./SignUpPage.css";
 import { createUser } from "../../../services/user.service";
 import { Link, useNavigate } from "react-router-dom";
 import { SignUpPageProps } from "./SignUpPageProps";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { UsersAPI } from "../../../services";
 
 const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
   //set state
@@ -14,6 +16,19 @@ const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
 
   //navigation
   const navigate = useNavigate();
+
+  //queryClient to invalidate query data
+  const quaryClient = useQueryClient();
+
+  //crate mutation
+  const signUpUserMutation = useMutation({
+    mutationFn: UsersAPI.createUser,
+    onSuccess: (data, variables, context) => {
+      showValidSignUp();
+      //invalidate cached query result
+      quaryClient.invalidateQueries(["users"]);
+    },
+  });
 
   //function to handle form submission
   const submitForm = (e: React.FormEvent) => {
@@ -56,22 +71,13 @@ const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
       return;
     }
 
-    // console.log(name, email, uname, password, rePassword);
-
-    //send request to JSON Server and find user with the username
-    (async () => {
-      try {
-        await createUser({
-          name: name,
-          username: uname,
-          password: password,
-          email: email,
-        });
-        showValidSignUp();
-      } catch (error) {
-        showInvalidSignUp();
-      }
-    })();
+    //send valid data to mutation
+    signUpUserMutation.mutate({
+      name: name,
+      username: uname,
+      password: password,
+      email: email,
+    });
   };
 
   //show invalid sign up status

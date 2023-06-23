@@ -4,6 +4,7 @@ import { useUserContext } from "../../../contexts";
 import { UsersAPI } from "../../../services";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginPageProps } from "./LoginPageProps";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
   //remove saved user from the local storage
@@ -22,6 +23,40 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
 
   //navigation
   const navigate = useNavigate();
+
+  //use reqct query mutation for login
+  const loginUserMutation = useMutation({
+
+    mutationFn: UsersAPI.seachUser,
+
+    onSuccess: (data,variables,context) => {
+      //variables - arguments send by mutate() call
+      //console.log(variables);
+
+      
+      //validate login on query success
+      if (data.length) {
+        let valid_user = data[0];
+        //login success
+        showValidLogin();
+        //set user details
+        setUser({
+          email: valid_user.email,
+          name: valid_user.name,
+          username: valid_user.username,
+          isLoggedIn: true,
+        });
+
+        //store in local storage **
+        localStorage.setItem("user", JSON.stringify(valid_user));
+
+        navigate("/");
+      } else {
+        //login fail
+        showInvalidLogin();
+      }
+    },
+  });
 
   //function to handle form submission
   const submitForm = (e: React.FormEvent) => {
@@ -47,34 +82,11 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
       return;
     }
 
-    //find user using api
-    const loginUser = async () => {
-      //add trycatch when caling external api ******
-      const users = await UsersAPI.seachUser({ username: uname, password: password });
-
-      if (users.length) {
-        let valid_user = users[0];
-        //login success
-        showValidLogin();
-        //set user details
-        setUser({
-          email: valid_user.email,
-          name: valid_user.name,
-          username: valid_user.username,
-          isLoggedIn: true,
-        });
-
-        //store in local storage **
-        localStorage.setItem("user", JSON.stringify(valid_user));
-
-        navigate("/");
-      } else {
-        //login fail
-        showInvalidLogin();
-      }
-    };
-
-    loginUser();
+    //call react query mutation with parameters
+    loginUserMutation.mutate({
+      username: uname,
+      password: password,
+    });
   };
 
   //show invalid login status
