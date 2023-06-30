@@ -1,8 +1,7 @@
 import React from "react";
 import { SectionLayout } from "../../layouts";
 
-import { ItemCard } from "../../components";
-import { Item } from "../../../types/Item";
+import { ItemCard } from "../../components"; 
 import { FlashSaleProps } from "./FlashSaleProps";
 
 export default function FlashSale({

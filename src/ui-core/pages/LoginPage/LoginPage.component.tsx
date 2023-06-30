@@ -5,6 +5,7 @@ import { UsersAPI } from "../../../services";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginPageProps } from "./LoginPageProps";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import InputField from "ui-core/components/atoms/InputField/InputField.component";
 
 const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
   //remove saved user from the local storage
@@ -116,8 +117,7 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
               </label>
             </div>
             <div className="form-login-input">
-              <input
-                autoFocus
+              <InputField                 
                 ref={usernnameRef}
                 type="text"
                 name="uname"
@@ -134,7 +134,7 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
               </label>
             </div>
             <div className="form-login-input">
-              <input
+              <InputField
                 ref={passwordRef}
                 type="password"
                 name="psw"

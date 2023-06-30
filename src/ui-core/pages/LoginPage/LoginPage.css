@@ -23,13 +23,7 @@
   color: #08ffd1;
   font-size: 17px;
 }
-.login input[type="password"],
-.login input[type="text"] {
-  margin-left: 10px;
-  border: none;
-  border-radius: 3px;
-  padding: 8px;
-}
+ 
 .login #login,
 .btn-sign-up {
   width: 300px;

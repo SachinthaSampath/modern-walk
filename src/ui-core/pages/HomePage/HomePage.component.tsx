@@ -1,4 +1,4 @@
-import { Header } from "../../components";
+import { Button, Header } from "../../components";
 import { FlashSale } from "../../templates";
 import { Category } from "../../templates";
 import { useQuery } from "@tanstack/react-query";
@@ -10,8 +10,8 @@ export default function HomePage(): React.JSX.Element {
   const { data, isLoading, isError } = useQuery(
     ["flashsale"],
     ProductsAPI.getFlashSaleProducts
-  ); 
-    
+  );
+
   return (
     <div className="home-page-container">
       <Header headingText="Modern Walk" />
@@ -21,6 +21,7 @@ export default function HomePage(): React.JSX.Element {
         <FlashSale flashItems={data as Item[]} />
       )}
       <Category />
+      <Button type="primary">Click me</Button> 
     </div>
   );
 }

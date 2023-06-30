@@ -6,10 +6,11 @@ import { WomensClothing } from "./ui-core";
 import { LoginPage } from "./ui-core";
 import { SignUpPage } from "./ui-core";
 
-import "./App.css";
 import { useUserContext } from "./contexts/";
 
 import { User } from "./types/User";
+import { GlobalStyles } from "./ui-core";
+import { ThemeProvider } from "styled-components";
 
 function App() {
   const { setUser: updateUser } = useUserContext();
@@ -29,18 +30,30 @@ function App() {
     }
   }, []);
 
+
+  //define theme colors
+  const theme = {
+    background:{
+      mens:"#2BD9AF",
+      womens:"#FF5E84"
+    }
+  }
+
   return (
-    <div className="main-container">
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/mens" element={<MensClothing />} />
-          <Route path="/womens" element={<WomensClothing />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-        </Routes>
-      </Router>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles/>
+        <div className="main-container">
+          <Router>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/mens" element={<MensClothing />} />
+              <Route path="/womens" element={<WomensClothing />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
+            </Routes>
+          </Router>
+        </div> 
+    </ThemeProvider>
   );
 }
 

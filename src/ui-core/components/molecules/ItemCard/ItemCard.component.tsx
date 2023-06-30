@@ -1,8 +1,8 @@
 import React from "react";
 import { H2 } from "../../atoms";
-import "./ItemCard.css";
 import { Item } from "../../../../types/Item";
 import { ItemCardProps } from "./ItemCard.types";
+import StyledItemCard from "./ItemCard.styled";
 
 export default function ItemCard({
   itemData,
@@ -10,7 +10,7 @@ export default function ItemCard({
   const { title, price, image, description, category } = itemData;
 
   return (
-    <div className="item-card-container">
+    <StyledItemCard>
       <H2 className="item-card-title">{title}</H2>
       <img src={image} alt="Flash sale item" className="item-card-img" />
       <div
@@ -21,6 +21,6 @@ export default function ItemCard({
         <H2 className="item-card-price">Rs {price}</H2>
         <p className="item-card-desc">{description}</p>
       </div>
-    </div>
+    </StyledItemCard>
   );
 }

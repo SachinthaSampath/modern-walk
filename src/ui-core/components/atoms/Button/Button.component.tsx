@@ -1,10 +1,7 @@
+import StyledButton from "./Button.styled";
 import { ButtonProps } from "./Button.types";
 
-function Button({ children }: ButtonProps):React.JSX.Element {
-  return (
-    <>
-      <button>{children}</button>
-    </>
-  );
+function Button({ children, type }: ButtonProps): React.JSX.Element {
+  return <StyledButton type={type}>{children}</StyledButton>;
 }
 export default Button;

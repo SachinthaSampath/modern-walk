@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "paths": {
-      "@components/*": ["./ui-core/components/*"],
-      "@pages/*": ["ui-core/pages/*"],
-      "@contexts/*": ["contexts/*"],
-      "@services/*": ["services/*"]
-    },
+    
 
     "jsx": "react-jsx",
     "target": "es2016",
@@ -14,7 +9,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitAny": true,
+    // "noImplicitAny": true,
     "strictNullChecks": true,
     "noImplicitThis": true,
     "alwaysStrict": true,

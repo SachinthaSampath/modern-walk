@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import { H1 } from "../../atoms";
-import "./Header.css";
 import { useUserContext } from "../../../../contexts";
 import { HeaderProps } from "./Header.types";
+import StyledHeader from "./Header.styled";
 
 export default function Header({
   headingText,
 }: HeaderProps): React.JSX.Element {
-  const {user} = useUserContext();
+
+  const { user } = useUserContext();
 
   return (
-    <div className="main-heading-container">
+    
+    <StyledHeader>
       <div className="heading-titile">
         <Link to="/">
           <H1>{headingText}</H1>
@@ -34,6 +36,6 @@ export default function Header({
           </>
         )}
       </div>
-    </div>
+    </StyledHeader>
   );
 }

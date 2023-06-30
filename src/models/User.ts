@@ -19,3 +19,5 @@
 // export function saveUser(user: User): void {
 //   localStorage.setItem("user", JSON.stringify(user));
 // }
+
+export {};
