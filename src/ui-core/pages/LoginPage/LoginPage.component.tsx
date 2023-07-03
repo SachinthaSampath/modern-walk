@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "./LoginPage.css";
+import "./LoginPage.scss";
 import { useUserContext } from "../../../contexts";
 import { UsersAPI } from "../../../services";
 import { Link, useNavigate } from "react-router-dom";

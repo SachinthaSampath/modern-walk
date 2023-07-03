@@ -6,7 +6,7 @@ import { WomensClothing } from "./ui-core";
 import { LoginPage } from "./ui-core";
 import { SignUpPage } from "./ui-core";
 
-import "./App.css";
+import "./App.scss";
 import { useUserContext } from "./contexts/";
 
 import { User } from "./types/User";

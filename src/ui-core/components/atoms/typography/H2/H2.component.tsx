@@ -1,4 +1,4 @@
-import "../Typography.css";
+import "../Typography.scss";
 import { H2Props } from "./H2.types";
 
 export default function H2({
