@@ -1,7 +1,240 @@
-body{
-  margin:0;
-  background:#F5F5F5;
+$container-background: #f5f5f5;
+
+@mixin flex-align($justify-content: center, $align-item: center) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-item;
 }
-.main-container{ 
-  background:#F5F5F5;
+
+body {
+  margin: 0;
+  background: $container-background;
+}
+.main-container {
+  background: $container-background;
+}
+
+.main-heading {
+  text-align: center;
+  font-family: "Roboto";
+  color: #0e0e0e;
+  text-decoration: none !important;
+}
+
+.category-card-container {
+  border-radius: 15px;
+  padding: 40px;
+  margin: 20px;
+  width: 30%;
+  height: 150px;
+  @include flex-align(center, center);
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  &:first-child {
+    background-color: #2bd9af;
+  }
+  &:nth-child(2) {
+    background-color: #ff5e84;
+  }
+}
+
+.main-heading-container {
+  border-bottom: 5px solid #d9d9d9;
+  display: flex;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.heading-titile {
+  width: 80%;
+  @include flex-align(center, center);
+}
+
+.heading-user-section {
+  width: 20%;
+  @include flex-align(flex-end, center);
+  p {
+    margin-right: 10px;
+    @include flex-align(flex-end, center);
+  }
+}
+
+.item-card-container {
+  border-radius: 20px;
+  background: white;
+  @include flex-align(space-between, center);
+  flex-direction: column;
+  max-width: 250px;
+  min-width: 200px;
+  height: 450px;
+  margin: 15px;
+}
+
+.item-card-details-container {
+  @include flex-align(flex-start, center);
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 10px;
+  height: 180px;
+  overflow: hidden;
+}
+.card-mens {
+  background: #2bd9af;
+}
+.card-womens {
+  background: #ff5e84;
+}
+
+.item-card-desc {
+  text-align: center;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.item-card-price {
+  margin: 0px;
+  color: #0e42fd;
+}
+
+.item-card-title {
+  font-size: 16px;
+  text-align: center;
+  padding: 5px 10px;
+}
+.item-card-img {
+  width: 100px;
+  max-height: 100px;
+  margin-bottom: 20px;
+}
+
+.flex-container {
+  margin: 40px;
+}
+.flex-container-heading {
+  padding-left: 55px;
+}
+
+.flex-container-main {
+  @include flex-align(center, stretch);
+  flex-wrap: wrap;
+}
+
+.login-container {
+  position: absolute;
+  margin-left: 50%;
+  left: -271px;
+  margin-top: 10%;
+}
+
+#form-login {
+  @include flex-align(center);
+  flex-direction: column;
+}
+
+.login {
+  width: 382px;
+  overflow: hidden;
+  margin: auto;
+  padding: 80px;
+  background: #23463f;
+  border-radius: 15px;
+  label {
+    color: #08ffd1;
+    font-size: 17px;
+  }
+  input[type="password"],
+  input[type="text"] {
+    margin-left: 10px;
+    border: none;
+    border-radius: 3px;
+    padding: 8px;
+  }
+}
+
+.login #login,
+.btn-sign-up {
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-radius: 17px;
+  padding-left: 7px;
+  color: blue;
+  cursor: pointer;
+}
+
+.btn-container {
+  @include flex-align();
+  flex-direction: column;
+  * {
+    margin-top: 5px;
+  }
+}
+
+.form-login-input-group {
+  display: flex;
+  margin-top: 10px;
+}
+.form-login-input-label {
+  width: 140px;
+  @include flex-align(flex-start);
+}
+.form-login-input {
+  width: 50%;
+}
+
+.sign-up-container {
+  position: absolute;
+  margin-left: 50%;
+  left: -271px;
+  margin-top: 10%;
+}
+
+#form-sign-up {
+  padding: 10px;
+}
+
+.sign-up {
+  width: 382px;
+  overflow: hidden;
+  margin: auto;
+  padding: 80px;
+  background: #23463f;
+  border-radius: 15px;
+  label {
+    color: #08ffd1;
+    font-size: 17px;
+  }
+  input[type="password"],
+  input[type="text"] {
+    margin-left: 10px;
+    border: none;
+    border-radius: 3px;
+    padding: 8px;
+  }
+  #sign-up {
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 17px;
+    padding-left: 7px;
+    color: blue;
+    cursor: pointer;
+  }
+}
+
+.form-sign-up-input-group {
+  display: flex;
+  margin-top: 10px;
+}
+.form-sign-up-input-label {
+  width: 140px;
+  @include flex-align(flex-start);
+}
+.form-sign-up-input {
+  width: 50%;
 }

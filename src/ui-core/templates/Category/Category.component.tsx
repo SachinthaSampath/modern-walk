@@ -1,5 +1,4 @@
 import React from "react";
-import "./Category.scss";
 import { SectionLayout } from "../../layouts";
 import { CategoryCard } from "../../components";
 

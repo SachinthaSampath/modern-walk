@@ -1,7 +1,5 @@
 import React from "react";
-import { H2 } from "../../atoms";
-import "./ItemCard.scss";
-import { Item } from "../../../../types/Item";
+import { H2 } from "../../atoms";  
 import { ItemCardProps } from "./ItemCard.types";
 
 export default function ItemCard({

@@ -1,4 +1,3 @@
-import "./SectionLayout.scss";
 import { H2 } from "../../components/atoms";
 import { SectionLayoutProps } from "./SectionLayout.types";
 

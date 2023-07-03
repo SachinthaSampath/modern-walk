@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./SignUpPage.scss";
 import { createUser } from "../../../services/user.service";
 import { Link, useNavigate } from "react-router-dom";
 import { SignUpPageProps } from "./SignUpPageProps";

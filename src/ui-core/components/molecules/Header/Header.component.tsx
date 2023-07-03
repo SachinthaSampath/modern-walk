@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { H1 } from "../../atoms";
-import "./Header.css";
 import { useUserContext } from "../../../../contexts";
 import { HeaderProps } from "./Header.types";
 
