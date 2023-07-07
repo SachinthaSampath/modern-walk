@@ -13,7 +13,7 @@ export default function HomePage(): React.JSX.Element {
   ); 
     
   return (
-    <div className="home-page-container">
+    <div className="">
       <Header headingText="Modern Walk" />
       {isLoading ? (
         <div>Loading...</div>

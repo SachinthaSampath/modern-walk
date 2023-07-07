@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./SignUpPage.css";
 import { createUser } from "../../../services/user.service";
 import { Link, useNavigate } from "react-router-dom";
 import { SignUpPageProps } from "./SignUpPageProps";
@@ -93,107 +92,97 @@ const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
   };
 
   return (
-    <div className="sign-up-container">
-      <div className="sign-up">
-        <form id="form-sign-up" onSubmit={submitForm}>
-          <div className="form-sign-up-input-group">
-            <div className="form-sign-up-input-label">
-              <label>
-                <b>Name</b>
-              </label>
-            </div>
-            <div className="form-sign-up-input">
-              <input
-                autoFocus
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Name"
-              />
-            </div>
-          </div>
-          <div className="form-sign-up-input-group">
-            <div className="form-sign-up-input-label">
-              <label>
-                <b>Email</b>
-              </label>
-            </div>
-            <div className="form-sign-up-input">
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="text"
-                name="email"
-                id="email"
-                placeholder="Email"
-              />
-            </div>
-          </div>
-          <div className="form-sign-up-input-group">
-            <div className="form-sign-up-input-label">
-              {" "}
-              <label>
-                <b>User Name</b>
-              </label>
-            </div>
-            <div className="form-sign-up-input">
-              <input
-                value={uname}
-                onChange={(e) => setUname(e.target.value)}
-                type="text"
-                name="uname"
-                id="uname"
-                placeholder="Username"
-              />
-            </div>
-          </div>
-          <div className="form-sign-up-input-group">
-            <div className="form-sign-up-input-label">
-              <label>
-                <b>Password</b>
-              </label>
-            </div>
-            <div className="form-sign-up-input">
-              {" "}
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                name="psw"
-                id="psw"
-                placeholder="Password"
-              />
-            </div>
-          </div>
-          <div className="form-sign-up-input-group">
-            <div className="form-sign-up-input-label">
-              <label>
-                <b>Confirm Password</b>
-              </label>
-            </div>
-            <div className="form-sign-up-input">
-              {" "}
-              <input
-                value={rePassword}
-                onChange={(e) => setRePassword(e.target.value)}
-                type="password"
-                name="repsw"
-                id="repsw"
-                placeholder="Confirm Password"
-              />
-            </div>
-          </div>
+    <div className="flex h-screen items-center">
+      <form
+        id="form-sign-up"
+        onSubmit={submitForm}
+        className="mx-auto space-y-4 rounded-xl p-6 shadow-lg md:w-1/2 xl:w-1/3 "
+      >
+        <div className="flex flex-col items-stretch">
+          <input
+            autoFocus
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+             py-1 text-sm placeholder-slate-400 shadow-sm
+             focus:border-sky-500 
+             focus:outline-none focus:ring-1 focus:ring-sky-500"
+          />
+        </div>
+        <div className="flex flex-col items-stretch">
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Email"
+            className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+             py-1 text-sm placeholder-slate-400 shadow-sm
+             focus:border-sky-500 
+             focus:outline-none focus:ring-1 focus:ring-sky-500"
+          />
+        </div>
+        <div className="flex flex-col items-stretch">
+          <input
+            value={uname}
+            onChange={(e) => setUname(e.target.value)}
+            type="text"
+            name="uname"
+            id="uname"
+            placeholder="Username"
+            className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+             py-1 text-sm placeholder-slate-400 shadow-sm
+             focus:border-sky-500 
+             focus:outline-none focus:ring-1 focus:ring-sky-500"
+          />
+        </div>
+        <div className="flex flex-col items-stretch">
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            name="psw"
+            id="psw"
+            placeholder="Password"
+            className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+             py-1 text-sm placeholder-slate-400 shadow-sm
+             focus:border-sky-500 
+             focus:outline-none focus:ring-1 focus:ring-sky-500"
+          />
+        </div>
+        <div className="flex flex-col items-stretch">
+          <input
+            value={rePassword}
+            onChange={(e) => setRePassword(e.target.value)}
+            type="password"
+            name="repsw"
+            id="repsw"
+            placeholder="Confirm Password"
+            className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+             py-1 text-sm placeholder-slate-400 shadow-sm
+             focus:border-sky-500 
+             focus:outline-none focus:ring-1 focus:ring-sky-500"
+          />
+        </div>
 
-          <p className="btn-container">
-            <input type="submit" name="sign-up" id="sign-up" value="Sign Up" />
-            <button className="btn-sign-up">
-              <Link to="/login">Login</Link>
-            </button>
-          </p>
-        </form>
-      </div>
+        <p className="my-4">
+          <input
+            type="submit"
+            name="sign-up"
+            id="sign-up"
+            value="Sign Up"
+            className="mt-3 w-full rounded-full bg-violet-600 px-3 py-1 font-medium text-white hover:cursor-pointer hover:bg-violet-800"
+          />
+          <button className="mt-3 w-full rounded-full bg-green-600 px-3 py-1 font-medium text-white hover:cursor-pointer hover:bg-green-800">
+            <Link to="/login">Login</Link>
+          </button>
+        </p>
+      </form>
     </div>
   );
 };

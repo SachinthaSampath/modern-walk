@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { H1 } from "../../atoms";
-import "./Header.css";
+import { H1 } from "../../atoms"; 
 import { useUserContext } from "../../../../contexts";
 import { HeaderProps } from "./Header.types";
 
@@ -10,26 +9,26 @@ export default function Header({
   const {user} = useUserContext();
 
   return (
-    <div className="main-heading-container">
-      <div className="heading-titile">
-        <Link to="/">
-          <H1>{headingText}</H1>
+    <div className="flex justify-between py-4 px-3">
+      <div className="flex justify-center w-full overflow-hidden h-10">
+        <Link className="font-bold text-3xl text-center hover:text-4xl transition-all " to="/">
+          <H1 >{headingText}</H1>
         </Link>
       </div>
-      <div className="heading-user-section">
+      <div className="flex justify-between items-center space-x-2 shrink-0">
         {user.isLoggedIn ? (
           <>
-            <p>
-              <img src="/user.png" alt="User icon" /> {user?.name}
+            <p className="flex items-center">
+              <img className="w-6 lg:w-8" src="/user.png" alt="User icon" /> &nbsp;{user?.name}
             </p>
             <p>
-              <Link to="/login">Logout</Link>
+              <Link to="/login" className="hover:ring-1 px-3 py-1 rounded-full">Logout</Link>
             </p>
           </>
         ) : (
           <>
             <p>
-              <Link to="/login">Login</Link>
+              <Link to="/login" className="hover:ring-1 px-3 py-1 rounded-full">Login</Link>
             </p>
           </>
         )}
