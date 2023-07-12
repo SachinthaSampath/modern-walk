@@ -5,11 +5,11 @@ import { MensClothing } from "./ui-core";
 import { WomensClothing } from "./ui-core";
 import { LoginPage } from "./ui-core";
 import { SignUpPage } from "./ui-core";
-
-import "./App.css";
+ 
 import { useUserContext } from "./contexts/";
 
 import { User } from "./types/User";
+import Test from "Test";
 
 function App() {
   const { setUser: updateUser } = useUserContext();
@@ -33,6 +33,7 @@ function App() {
     <div className="main-container">
       <Router>
         <Routes>
+          <Route path="/test" element={<Test/>}/>
           <Route path="/" element={<HomePage />} />
           <Route path="/mens" element={<MensClothing />} />
           <Route path="/womens" element={<WomensClothing />} />
