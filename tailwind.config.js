@@ -16,12 +16,45 @@ module.exports = {
       },
     },
     extend: {
+      boxShadow: {
+        mwnormal: "0px 0px 30px 0px rgba(0, 25, 72, 0.15)",
+        mwhover: "0px 10px 40px 0px rgba(0, 25, 72, 0.25)",
+        mwselected: "0px 5px 30px 0px rgba(0, 25, 72, 0.25)",
+      },
       colors: {
-
         //modern walk colors
-        womens:"rgb(var(--mw-womens)/<alpha-value>)",
-        mens:"rgb(var(--mw-mens)/<alpha-value>)",
+        womens: "rgb(var(--mw-womens)/<alpha-value>)",
+        mens: "rgb(var(--mw-mens)/<alpha-value>)",
 
+        mwprimarynormal: "var(--primary-normal)",
+        mwprimaryhover: "var(--primary-hover)",
+        mwprimaryselected: "var(--primary-selected)",
+        mwprimaryinverse: "var(--primary-inverse)",
+        mwprimarydisabled: "var(--primary-disabled)",
+        mwprimaryinversehover: "var(--primary-inverse-hover)",
+        mwprimaryclick: "var(--primary-click)",
+
+        mwtypomain: "var(--typo-main)",
+        mwtypoactive: "var(--typo-active)",
+        mwtypoborderdark: "var(--typo-border-dark)",
+        mwtypoinactive: "var(--typo-inactive)",
+        mwtypoborderlight: "var(--typo-border-light)",
+
+        mwbackgroundgrey: "var(--background-grey)",
+        mwbackgroundcontrast: "var(--background-contrast)",
+        mwbackgroundwhite: "var(--background-white)",
+
+        mwlinkblue: "var(--link-blue)",
+        mwlinkhover: "var(--link-hover)",
+        mwlinkactive: "var(--link-active)",
+        mwlinkdisabled: "var(--link-disabled)",
+
+        mwdangered: "var(--danger-red)",
+        mwdangerglow: "var(--danger-glow)",
+        mwdangerinactive: "var(--danger-inactive)",
+        mwdangerdisabled: "var(--danger-disabled)",
+        mwdangerhover: "var(--danger-hover)",
+        mwdangeractive: "var(--danger-active)",
 
         // lightest and darkest variations of tailwind color pallet
         lightest: {
@@ -73,8 +106,6 @@ module.exports = {
           rose: "#4c0519",
         },
 
-
-        
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

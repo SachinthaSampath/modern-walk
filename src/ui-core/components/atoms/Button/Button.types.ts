@@ -1,6 +1,10 @@
-import React from "react";
+import { VariantProps } from "class-variance-authority";
+import { buttonVariants } from "./Button.buttonVariants";
 
-export type ButtonProps = {
-  children: React.ReactNode;
-};
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
 
+export { type ButtonProps };
