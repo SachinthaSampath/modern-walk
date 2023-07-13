@@ -5,7 +5,8 @@
       "@components/*": ["./ui-core/components/*"],
       "@pages/*": ["ui-core/pages/*"],
       "@contexts/*": ["contexts/*"],
-      "@services/*": ["services/*"]
+      "@services/*": ["services/*"],
+      "@/*": ["./*"]
     },
 
     "jsx": "react-jsx",
