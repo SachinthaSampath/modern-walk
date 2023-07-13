@@ -1,9 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
+
+    /* modern walk colors */
+    --mw-mens: 43 217 175;
+    --mw-womens: 255 94 132;
+
+    /* custom colors */
+    --color-primary: 255 115 179;
+    --color-secondary: 111 114 185;
+    --color-success: #198754;
+    --color-info: #0dcaf0;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    --color-light: #f8f9fa;
+    --color-dark: #212529;
+
+
+    
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
 

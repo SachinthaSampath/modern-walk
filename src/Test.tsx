@@ -34,7 +34,7 @@ function classNames(...classes) {
 }
 const Test = () => {
   return (
-    <div className="mx-auto w-40">
+    <div className="mx-auto w-40 ">
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger>Is it accessible?</AccordionTrigger>
