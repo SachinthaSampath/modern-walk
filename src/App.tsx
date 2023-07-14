@@ -10,6 +10,7 @@ import { useUserContext } from "./contexts/";
 
 import { User } from "./types/User";
 import Test from "Test";
+import { TestForm } from "./TestForm";
 
 function App() {
   const { setUser: updateUser } = useUserContext();
@@ -34,6 +35,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/test" element={<Test/>}/>
+          <Route path="/testform" element={<TestForm/>}/>
           <Route path="/" element={<HomePage />} />
           <Route path="/mens" element={<MensClothing />} />
           <Route path="/womens" element={<WomensClothing />} />

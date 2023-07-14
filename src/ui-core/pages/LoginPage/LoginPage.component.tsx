@@ -4,14 +4,35 @@ import { UsersAPI } from "../../../services";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginPageProps } from "./LoginPageProps";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+import { Button } from "../../../ui-core";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../../ui-core";
+import { Input } from "../../../ui-core";
+
+//define schema for the form
+const loginSchema = z.object({
+  username: z.string().min(1, {
+    message: "Username cannot be empty."
+  }),
+  password: z.string().min(1, {
+    message: "Password cannot be empty."
+  }),
+});
 
 const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
   //remove saved user from the local storage
   localStorage.removeItem("user");
-
-  //set state
-  // const [uname, setUname] = useState("");
-  // const [password, setPassword] = useState("");
 
   //use contexts with custom hooks
   const { setUser } = useUserContext();
@@ -78,12 +99,6 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
       el?.focus();
       return;
     }
-
-    //call react query mutation with parameters
-    loginUserMutation.mutate({
-      username: uname,
-      password: password,
-    });
   };
 
   //show invalid login status
@@ -101,63 +116,100 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
     window.localStorage.loggedIn = true;
   };
 
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
+
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof loginSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+
+    //call react query mutation with parameters
+    loginUserMutation.mutate({
+      username: values.username,
+      password: values.password,
+    });
+  }
+
   return (
     <>
-      <div className="h-screen flex items-center">
-        <form
-          className="mx-auto space-y-4 rounded-xl p-6 shadow-lg md:w-1/2 xl:w-1/3 "
-          id="form-login"
-          onSubmit={submitForm}
-        >
-          <div className="flex flex-col items-stretch">
-            <label className="block text-sm font-medium text-slate-700">
-              {/* User Name */}
-            </label>
-            <input
-              className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
-             py-1 text-sm placeholder-slate-400 shadow-sm
-             focus:border-sky-500 
-             focus:outline-none focus:ring-1 focus:ring-sky-500"
-              autoFocus
-              ref={usernnameRef}
-              type="text"
-              name="uname"
-              id="uname"
-              placeholder="Username"
+      <div className="flex h-screen flex-row items-center">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            id="form-login"
+            className="mx-auto space-y-4 rounded-xl p-6 shadow-lg md:w-1/2 xl:w-1/3 "
+          >
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+                    py-1 text-sm placeholder-slate-400 shadow-sm
+                    focus:border-sky-500 
+                    focus:outline-none focus:ring-1 focus:ring-sky-500"
+                      type="text"
+                      id="uname"
+                      placeholder="Username"
+                      autoFocus
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-
-          <div className="flex flex-col items-stretch">
-            <label className="block text-sm font-medium text-slate-700">
-              {/* Password */}
-            </label>
-
-            <input
-              className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
-          py-1 text-sm placeholder-slate-400 shadow-sm
-          focus:border-sky-500 
-          focus:outline-none focus:ring-1 focus:ring-sky-500"
-              ref={passwordRef}
-              type="password"
-              name="psw"
-              id="psw"
-              placeholder="Password"
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+                       py-1 text-sm placeholder-slate-400 shadow-sm
+                       focus:border-sky-500 
+                       focus:outline-none focus:ring-1 focus:ring-sky-500"
+                      type="password"
+                      id="psw"
+                      placeholder="Password"
+                      autoFocus
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-
-          <p className="my-4">
-            <input
-              type="submit"
+            <Button
+              variant={"primary"}
               name="login"
               id="login"
               value="Login"
-              className="mt-3 w-full rounded-full bg-violet-600 px-3 py-1 font-medium text-white hover:cursor-pointer hover:bg-violet-800"
-            />
-            <button className="mt-3 w-full rounded-full bg-green-600 px-3 py-1 font-medium text-white hover:cursor-pointer hover:bg-green-800">
+              className="mt-3 w-full rounded-full"
+              type="submit"
+            >
+              Login
+            </Button>
+            <Button
+              variant={"secondary"}
+              type="button"
+              className="mt-3 w-full rounded-full"
+            >
               <Link to="/signup">SignUp</Link>
-            </button>
-          </p>
-        </form>
+            </Button>
+          </form>
+        </Form>
       </div>
     </>
   );

@@ -4,6 +4,51 @@ import { Link, useNavigate } from "react-router-dom";
 import { SignUpPageProps } from "./SignUpPageProps";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UsersAPI } from "../../../services";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Button } from "../../../ui-core";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../../ui-core";
+import { Input } from "../../../ui-core";
+
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+
+const formSchema = z
+  .object({
+    name: z
+      .string()
+      .min(5, {
+        message: "Name must be atleast 5 characters.",
+      })
+      .max(45, { message: "Name can be maximum 45 characters." }),
+    email: z
+      .string()
+      .min(1, { message: "Email cannot be empty." })
+      .email("This is not a valid email.")
+      .refine((e) => true, "This email is already registered."),
+    username: z
+      .string()
+      .min(1, "Username cannot be empty.")
+      .max(15, "Username cannot be more than 15 characters long."),
+    password: z.string().min(4),
+    confirmPassword: z.string().min(4),
+  })
+  .superRefine(({ confirmPassword, password }, ctx) => {
+    if (confirmPassword !== password) {
+      ctx.addIssue({
+        code: "custom",
+        message: "The passwords did not match",
+      });
+    }
+  });
 
 const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
   //set state
@@ -28,6 +73,29 @@ const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
       quaryClient.invalidateQueries(["users"]);
     },
   });
+
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+    },
+  });
+
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+
+    //send valid data to mutation
+    signUpUserMutation.mutate({
+      name: values.name,
+      username: values.username,
+      password: values.password,
+      email: values.email,
+    });
+  }
 
   //function to handle form submission
   const submitForm = (e: React.FormEvent) => {
@@ -69,14 +137,6 @@ const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
       el?.select();
       return;
     }
-
-    //send valid data to mutation
-    signUpUserMutation.mutate({
-      name: name,
-      username: uname,
-      password: password,
-      email: email,
-    });
   };
 
   //show invalid sign up status
@@ -92,97 +152,128 @@ const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
   };
 
   return (
-    <div className="flex h-screen items-center">
-      <form
-        id="form-sign-up"
-        onSubmit={submitForm}
-        className="mx-auto space-y-4 rounded-xl p-6 shadow-lg md:w-1/2 xl:w-1/3 "
-      >
-        <div className="flex flex-col items-stretch">
-          <input
-            autoFocus
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            type="text"
+    <div className="flex h-screen  items-center">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="mx-auto space-y-4 rounded-xl p-6 shadow-lg md:w-1/2 xl:w-1/3 "
+        >
+          <FormField
+            control={form.control}
             name="name"
-            id="name"
-            placeholder="Name"
-            className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+            render={({ field }) => (
+              <FormItem className="flex flex-col items-stretch">
+                <FormControl>
+                  <Input
+                    className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
              py-1 text-sm placeholder-slate-400 shadow-sm
              focus:border-sky-500 
              focus:outline-none focus:ring-1 focus:ring-sky-500"
+                    type="text"
+                    placeholder="Name"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="flex flex-col items-stretch">
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="text"
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem className="flex flex-col items-stretch">
+                <FormControl>
+                  <Input
+                    className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+             py-1 text-sm placeholder-slate-400 shadow-sm
+             focus:border-sky-500 
+             focus:outline-none focus:ring-1 focus:ring-sky-500"
+                    placeholder="Username"
+                    {...field}
+                    type="text"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="email"
-            id="email"
-            placeholder="Email"
-            className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+            render={({ field }) => (
+              <FormItem className="flex flex-col items-stretch">
+                <FormControl>
+                  <Input
+                    className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
              py-1 text-sm placeholder-slate-400 shadow-sm
              focus:border-sky-500 
              focus:outline-none focus:ring-1 focus:ring-sky-500"
+                    placeholder="Email"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="flex flex-col items-stretch">
-          <input
-            value={uname}
-            onChange={(e) => setUname(e.target.value)}
-            type="text"
-            name="uname"
-            id="uname"
-            placeholder="Username"
-            className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem className="flex flex-col items-stretch">
+                <FormControl>
+                  <Input
+                    className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
              py-1 text-sm placeholder-slate-400 shadow-sm
              focus:border-sky-500 
              focus:outline-none focus:ring-1 focus:ring-sky-500"
+                    placeholder="Password"
+                    {...field}
+                    type="password"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="flex flex-col items-stretch">
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            name="psw"
-            id="psw"
-            placeholder="Password"
-            className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem className="flex flex-col items-stretch">
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="Confirm Password"
+                    className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
              py-1 text-sm placeholder-slate-400 shadow-sm
              focus:border-sky-500 
              focus:outline-none focus:ring-1 focus:ring-sky-500"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Confirm your password by re-typing it.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="flex flex-col items-stretch">
-          <input
-            value={rePassword}
-            onChange={(e) => setRePassword(e.target.value)}
-            type="password"
-            name="repsw"
-            id="repsw"
-            placeholder="Confirm Password"
-            className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
-             py-1 text-sm placeholder-slate-400 shadow-sm
-             focus:border-sky-500 
-             focus:outline-none focus:ring-1 focus:ring-sky-500"
-          />
-        </div>
-
-        <p className="my-4">
-          <input
-            type="submit"
-            name="sign-up"
-            id="sign-up"
-            value="Sign Up"
-            className="mt-3 w-full rounded-full bg-violet-600 px-3 py-1 font-medium text-white hover:cursor-pointer hover:bg-violet-800"
-          />
-          <button className="mt-3 w-full rounded-full bg-green-600 px-3 py-1 font-medium text-white hover:cursor-pointer hover:bg-green-800">
-            <Link to="/login">Login</Link>
-          </button>
-        </p>
-      </form>
+          <p className="my-4">
+            <Button variant={"primary"} type="submit" className="mt-3 w-full">
+              SignUp
+            </Button>
+            <Button
+              variant={"secondary"}
+              type="button"
+              className="mt-3 w-full"
+            >
+              <Link to="/login">Login</Link>
+            </Button>
+          </p>
+        </form>
+      </Form>
     </div>
   );
 };
