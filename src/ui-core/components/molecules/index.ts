@@ -1,5 +1,4 @@
-export * from "./CategoryCard";
-export * from "./Header";
+export * from "./CategoryCard"; 
 export * from "./ItemCard";
 export * from "./Popover";
 export * from "./Calendar";

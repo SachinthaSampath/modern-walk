@@ -5,6 +5,12 @@ import {
   AccordionItem,
   AccordionTrigger,
   DatePickerWithRange,
+  MenubarCheckboxItem,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
   OptionDropdown,
   Toaster,
 } from "./ui-core";
@@ -28,6 +34,16 @@ import { ParentComponentTestRef } from "./TestRef";
 
 import { Switch } from "./ui-core";
 
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "./ui-core";
+
 const links = [
   { href: "/", label: "Home" },
   { href: "/mens", label: "Men's clothing" },
@@ -46,6 +62,102 @@ const Test = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   return (
     <>
+      <Menubar className="mt-0 h-12 w-full justify-end rounded-none border-0 bg-mwprimarynormal text-white">
+        <MenubarMenu>
+          <MenubarTrigger>File</MenubarTrigger>
+          <MenubarContent>
+            <MenubarItem
+              onClick={() => {
+                window.open(process.env.REACT_APP_BASE_URL);
+              }}
+            >
+              New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+            </MenubarItem>
+            <MenubarItem
+              onClick={() => {
+                window.open(
+                  document.URL,
+                  "_blank",
+                  "location=yes,height=570,width=520,scrollbars=yes,status=yes"
+                );
+              }}
+            >
+              New Window <MenubarShortcut>⌘N</MenubarShortcut>
+            </MenubarItem>
+            <MenubarItem
+              onClick={() => {
+                window.open(
+                  document.URL,
+                  "incognito",
+                  "location=yes,height=570,width=520,scrollbars=yes,status=yes"
+                );
+              }}
+            >
+              New Incognito Window
+            </MenubarItem>
+            <MenubarSeparator />
+            <MenubarSub>
+              <MenubarSubTrigger>Share</MenubarSubTrigger>
+              <MenubarSubContent>
+                <MenubarItem
+                  onClick={() => {
+                    let currentURL = window.location.href;
+                    let subject = "Check out this link";
+                    let body =
+                      "Hey! This was developed by Sachintha (intern of WireApps) as part of the ModernWalk system of the WireApps internship FE program. I just wanted to share this link with you: " +
+                      currentURL;
+                    let mailtoLink =
+                      "mailto:?subject=" +
+                      encodeURIComponent(subject) +
+                      "&body=" +
+                      encodeURIComponent(body);
+                    let newWindow = window.open("");
+                    newWindow!.window.location.href = mailtoLink;
+                  }}
+                >
+                  Email link
+                </MenubarItem>
+              </MenubarSubContent>
+            </MenubarSub>
+            <MenubarSeparator />
+            <MenubarItem
+              onClick={() => {
+                window.print();
+              }}
+            >
+              Print... <MenubarShortcut>⌘P</MenubarShortcut>
+            </MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger>Edit</MenubarTrigger>
+          <MenubarContent>
+            <MenubarItem
+              onClick={() => {
+                window.open(process.env.REACT_APP_REPO_URL, "_blank");
+              }}
+            >
+              View Repository <MenubarShortcut>ctrl+k</MenubarShortcut>
+            </MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+       
+        <MenubarMenu>
+          <MenubarTrigger>Profiles</MenubarTrigger>
+          <MenubarContent>
+            <MenubarRadioGroup value="benoit">
+              <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
+              <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
+              <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
+            </MenubarRadioGroup>
+            <MenubarSeparator />
+            <MenubarItem inset>Edit...</MenubarItem>
+            <MenubarSeparator />
+            <MenubarItem inset>Add Profile...</MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+      </Menubar>
+
       <div className="mx-10 grid grid-cols-3 gap-10 ">
         <div>
           <Accordion type="single" collapsible>

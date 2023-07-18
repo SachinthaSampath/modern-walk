@@ -41,13 +41,9 @@ const formSchema = z
     password: z.string().min(4),
     confirmPassword: z.string().min(4),
   })
-  .superRefine(({ confirmPassword, password }, ctx) => {
-    if (confirmPassword !== password) {
-      ctx.addIssue({
-        code: "custom",
-        message: "The passwords did not match",
-      });
-    }
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
   });
 
 const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
@@ -264,11 +260,7 @@ const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
             <Button variant={"primary"} type="submit" className="mt-3 w-full">
               SignUp
             </Button>
-            <Button
-              variant={"secondary"}
-              type="button"
-              className="mt-3 w-full"
-            >
+            <Button variant={"secondary"} type="button" className="mt-3 w-full">
               <Link to="/login">Login</Link>
             </Button>
           </p>
