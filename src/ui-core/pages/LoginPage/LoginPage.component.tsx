@@ -1,33 +1,38 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useUserContext } from "../../../contexts";
 import { UsersAPI } from "../../../services";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginPageProps } from "./LoginPageProps";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { Button } from "../../../ui-core";
+import { Button, Checkbox, H1 } from "../../../ui-core";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "../../../ui-core";
 import { Input } from "../../../ui-core";
+import { EyeClosedIcon } from "@radix-ui/react-icons";
+import { EyeSlashIcon } from "@heroicons/react/20/solid";
 
 //define schema for the form
 const loginSchema = z.object({
-  username: z.string().min(1, {
-    message: "Username cannot be empty."
-  }),
+  email: z
+    .string()
+    .min(1, {
+      message: "Email cannot be empty.",
+    })
+    .email({ message: "Please enter a valid email address" }),
   password: z.string().min(1, {
-    message: "Password cannot be empty."
+    message: "Password cannot be empty.",
   }),
+  remember: z.boolean().default(false).optional(),
 });
 
 const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
@@ -36,10 +41,6 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
 
   //use contexts with custom hooks
   const { setUser } = useUserContext();
-
-  //useRef to hold reference to input elements
-  const usernnameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
 
   //navigation
   const navigate = useNavigate();
@@ -55,73 +56,53 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
       //validate login on query success
       if (data.length) {
         let valid_user = data[0];
-        //login success
-        showValidLogin();
-        //set user details
-        setUser({
-          email: valid_user.email,
-          name: valid_user.name,
-          username: valid_user.username,
-          isLoggedIn: true,
-        });
+        if (valid_user.password !== form.getValues().password) {
+          form.setError(
+            "password",
+            { message: "Invalid password" },
+            { shouldFocus: true }
+          );
+        } else {
+          //login success
+          //save login status
+          window.localStorage.loggedIn = true;
 
-        //store in local storage **
-        localStorage.setItem("user", JSON.stringify(valid_user));
+          //set user details
+          setUser({
+            email: valid_user.email,
+            name: valid_user.name,
+            username: valid_user.username,
+            isLoggedIn: true,
+          });
 
-        navigate("/");
+          if (form.getValues().remember) {
+            //store in local storage **
+            localStorage.setItem("user", JSON.stringify(valid_user));
+          }
+
+          navigate("/");
+        }
       } else {
         //login fail
-        showInvalidLogin();
+        form.setError(
+          "email",
+          {
+            message:
+              "We couldn't find your account. Try again or contact your admin",
+          },
+          { shouldFocus: true }
+        );
       }
     },
   });
-
-  //function to handle form submission
-  const submitForm = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    //get values from input fields
-    let uname = usernnameRef.current?.value || "";
-    let password = passwordRef.current?.value || "";
-
-    //validate username
-    if (!uname.trim()) {
-      // alert("Please enter valid username!");
-      let el = document.getElementById("uname");
-      el?.focus();
-      return;
-    }
-
-    //validate password
-    if (!password) {
-      // alert("Please enter valid password!");
-      let el = document.getElementById("psw");
-      el?.focus();
-      return;
-    }
-  };
-
-  //show invalid login status
-  const showInvalidLogin = () => {
-    alert("Invalid credentials!");
-    let el = document.getElementById("uname") as HTMLInputElement;
-    el?.focus();
-    el?.select();
-  };
-
-  //show valid login status
-  const showValidLogin = () => {
-    // alert("Login success!");
-    //save login status
-    window.localStorage.loggedIn = true;
-  };
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
+      remember: false,
     },
   });
 
@@ -133,14 +114,14 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
 
     //call react query mutation with parameters
     loginUserMutation.mutate({
-      username: values.username,
-      password: values.password,
+      email: values.email,
     });
   }
 
   return (
     <>
-      <div className="flex h-screen flex-row items-center">
+      <div className="flex h-screen flex-col items-center justify-center">
+        <H1 className="font-[Qhicksand] text-[48px] font-bold">Modern Walk</H1>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -149,9 +130,10 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
           >
             <FormField
               control={form.control}
-              name="username"
+              name="email"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Email Address *</FormLabel>
                   <FormControl>
                     <Input
                       className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
@@ -173,41 +155,70 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="relative">
+                  <FormLabel>Password *</FormLabel>
                   <FormControl>
-                    <Input
-                      className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
+                    <>
+                      <Input
+                        className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
                        py-1 text-sm placeholder-slate-400 shadow-sm
                        focus:border-sky-500 
                        focus:outline-none focus:ring-1 focus:ring-sky-500"
-                      type="password"
-                      id="psw"
-                      placeholder="Password"
-                      autoFocus
-                      {...field}
-                    />
+                        type="password"
+                        id="psw"
+                        placeholder="Password"
+                        autoFocus
+                        {...field}
+                      />
+                      <span
+                        onClick={() => {}}
+                        className="absolute right-2 top-9 inline-block h-4 w-4 overflow-hidden xl:right-3"
+                      >
+                        <EyeSlashIcon />
+                      </span>
+                    </>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button
-              variant={"primary"}
-              name="login"
-              id="login"
-              value="Login"
-              className="mt-3 w-full rounded-full"
-              type="submit"
-            >
-              Login
-            </Button>
-            <Button
-              variant={"secondary"}
-              type="button"
-              className="mt-3 w-full rounded-full"
-            >
-              <Link to="/signup">SignUp</Link>
-            </Button>
+            <div className="my-0 py-0">
+              <Link to="/signup" className="text-[#ceb3af] hover:underline ">
+                Forgot password?
+              </Link>
+            </div>
+            <div className="flex items-center justify-between">
+              <FormField
+                control={form.control}
+                name="remember"
+                render={({ field }) => (
+                  <FormItem className="flex  items-start ">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        id="chk"
+                      />
+                    </FormControl>
+                    <FormLabel className="text-[#18213280]">
+                      {" "}
+                      Remember me
+                    </FormLabel>
+                  </FormItem>
+                )}
+              />
+
+              <Button
+                variant={"primary"}
+                name="login"
+                id="login"
+                value="Login"
+                className="mt-3 rounded-xl"
+                type="submit"
+              >
+                Sign in
+              </Button>
+            </div>
           </form>
         </Form>
       </div>

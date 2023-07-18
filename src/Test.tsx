@@ -15,6 +15,9 @@ import {
   Toaster,
 } from "./ui-core";
 
+import { Label } from "./ui-core";
+import { RadioGroup, RadioGroupItem } from "./ui-core";
+
 import { useToast } from "./ui-core";
 
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from "./ui-core";
@@ -43,6 +46,8 @@ import {
   MenubarShortcut,
   MenubarTrigger,
 } from "./ui-core";
+
+import { Checkbox } from "./ui-core";
 
 const links = [
   { href: "/", label: "Home" },
@@ -141,7 +146,7 @@ const Test = () => {
             </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
-       
+
         <MenubarMenu>
           <MenubarTrigger>Profiles</MenubarTrigger>
           <MenubarContent>
@@ -159,6 +164,22 @@ const Test = () => {
       </Menubar>
 
       <div className="mx-10 grid grid-cols-3 gap-10 ">
+        <Checkbox />
+
+        <RadioGroup
+          defaultValue="option-one"
+          className="flex flex-col items-start"
+        >
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="option-one" id="option-one" />
+            <Label htmlFor="option-one">Option One</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="option-two" id="option-two" />
+            <Label htmlFor="option-two">Option Two</Label>
+          </div>
+        </RadioGroup>
+
         <div>
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
