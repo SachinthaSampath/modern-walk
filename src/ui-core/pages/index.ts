@@ -3,3 +3,4 @@ export * from "./LoginPage";
 export * from "./MensClothing";
 export * from "./SignUpPage";
 export * from "./WomensClothing";
+export * from "./CartPage";

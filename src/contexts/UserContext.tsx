@@ -26,6 +26,7 @@ const defaultUser: User = {
   isLoggedIn: false,
 };
 
+
 //create  user context provider
 const UserProvider: React.FC<UserProviderProps> = ({
   children,

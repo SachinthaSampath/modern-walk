@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { H1 } from "../../atoms";
 import { useUserContext } from "../../../../contexts";
 import { HeaderProps } from "./Header.types";
@@ -19,12 +19,15 @@ import {
   MenubarSubTrigger,
 } from "../../../../ui-core";
 import { ShoppingCartIcon } from "lucide-react";
+import { useToast } from "../../../../ui-core";
 
 export default function Header({
   headingText,
 }: HeaderProps): React.JSX.Element {
   const { user } = useUserContext();
 
+  const navigate = useNavigate();
+  const { toast } = useToast();
   return (
     <>
       <Menubar className="mt-0 h-12 w-full justify-end rounded-none border-0 bg-mwprimarynormal text-white">
@@ -112,8 +115,24 @@ export default function Header({
               <ShoppingCartIcon />
             </MenubarTrigger>
             <MenubarContent>
-              <MenubarItem>View Cart</MenubarItem>
-              <MenubarItem>Clear Cart</MenubarItem>
+              <MenubarItem
+                onClick={() => {
+                  navigate("/cart");
+                }}
+              >
+                View Cart
+              </MenubarItem>
+              <MenubarItem
+                onClick={() => {
+                  localStorage.removeItem("cart");
+                  toast({
+                    title: "Cart cleared!",
+                  });
+                  navigate("/cart");
+                }}
+              >
+                Clear Cart
+              </MenubarItem>
               <MenubarItem>Checkout</MenubarItem>
             </MenubarContent>
           </MenubarMenu>

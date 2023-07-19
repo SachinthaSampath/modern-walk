@@ -1,8 +1,8 @@
 import React from "react";
-import { H2 } from "../../atoms";
+import { Button, H2 } from "../../../../ui-core";
 import { Item } from "../../../../types/Item";
 import { ItemCardProps } from "./ItemCard.types";
-
+import { useToast } from "../../../../ui-core";
 import {
   Card,
   CardContent,
@@ -11,11 +11,44 @@ import {
   CardHeader,
   CardTitle,
 } from "../../../../components/ui/card";
+import { useUserContext } from "../../../../contexts";
 
 export default function ItemCard({
   itemData,
 }: ItemCardProps): React.JSX.Element {
-  const { title, price, image, description, category } = itemData;
+  const { title, price, image, description, category, id } = itemData;
+  const { user } = useUserContext();
+  const { toast } = useToast();
+
+  function addItemToCart(item: Item) {
+    let id = item.id;
+    //get the cart from local storage
+    let cartRow = localStorage.getItem("cart");
+    let cart: { id: number; qty: number; data: Item }[] = [];
+    if (cartRow) {
+      cart = JSON.parse(cartRow);
+    } else {
+      cart = [];
+    }
+    //check if the item exits
+    let found = false;
+    let newCart = cart.map((item) => {
+      if (item.id == id) {
+        found = true;
+        return { id, qty: item.qty + 1, data: item.data };
+      } else {
+        return item;
+      }
+    });
+    if (!found) {
+      newCart.push({ id, qty: 1, data: item });
+    }
+    toast({
+      title: "Item added!",
+      description: item.title,
+    });
+    localStorage.setItem("cart", JSON.stringify(newCart));
+  }
 
   return (
     <>
@@ -39,6 +72,15 @@ export default function ItemCard({
             }`}
           >
             <H2 className="font-bold text-[#0E42FD]">Rs {price}</H2>
+            {user.isLoggedIn ? (
+              <p className="py-1">
+                <Button size={"sm"} onClick={() => addItemToCart(itemData)}>
+                  Add to Cart
+                </Button>
+              </p>
+            ) : (
+              <></>
+            )}
             <CardDescription className="h-full w-full overflow-hidden py-2">
               <p className="text-center text-sm text-black ">{description}</p>
             </CardDescription>

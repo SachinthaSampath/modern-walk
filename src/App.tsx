@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { HomePage } from "./ui-core";
+import { HomePage, Toaster } from "./ui-core";
 import { MensClothing } from "./ui-core";
 import { WomensClothing } from "./ui-core";
 import { LoginPage } from "./ui-core";
 import { SignUpPage } from "./ui-core";
+import { CartPage } from "./ui-core";
  
 import { useUserContext } from "./contexts/";
 
@@ -41,8 +42,10 @@ function App() {
           <Route path="/womens" element={<WomensClothing />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </Router>
+      <Toaster/>
     </div>
   );
 }
