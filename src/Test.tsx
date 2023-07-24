@@ -4,6 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  CustomPopover,
   DatePickerWithRange,
   MenubarCheckboxItem,
   MenubarRadioGroup,
@@ -12,6 +13,7 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   OptionDropdown,
+  PopoverClose,
   Toaster,
 } from "./ui-core";
 
@@ -261,9 +263,21 @@ const Test = () => {
         <div>
           <Popover>
             <PopoverTrigger>Open</PopoverTrigger>
-            <PopoverContent>Place content for the popover here.</PopoverContent>
+            <PopoverContent>
+              <h4>Title</h4>
+              <PopoverClose>Close</PopoverClose>
+            </PopoverContent>
           </Popover>
         </div>
+
+        <CustomPopover
+          triggerText="Open"
+          titleText="Title"
+          cancelText="Cancel"
+          actionText="Action Button"
+        >
+          <div>abc</div>
+        </CustomPopover>
 
         <Popover>
           <PopoverTrigger asChild>

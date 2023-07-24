@@ -26,6 +26,8 @@ module.exports = {
         womens: "rgb(var(--mw-womens)/<alpha-value>)",
         mens: "rgb(var(--mw-mens)/<alpha-value>)",
 
+        mwactive:"var(--mw-active)",
+
         mwprimarynormal: "var(--primary-normal)",
         mwprimaryhover: "var(--primary-hover)",
         mwprimaryselected: "var(--primary-selected)",

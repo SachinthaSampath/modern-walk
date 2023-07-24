@@ -133,7 +133,9 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email Address *</FormLabel>
+                  <FormLabel className="text-[#182132]-500">
+                    Email Address <span className="text-[#FD7967]">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3
@@ -156,7 +158,9 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
               name="password"
               render={({ field }) => (
                 <FormItem className="relative">
-                  <FormLabel>Password *</FormLabel>
+                  <FormLabel className="text-[#182132]-500">
+                    Password <span className="text-[#FD7967]">*</span>
+                  </FormLabel>
                   <FormControl>
                     <>
                       <Input
@@ -183,7 +187,7 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
               )}
             />
             <div className="my-0 py-0">
-              <Link to="/signup" className="text-[#ceb3af] hover:underline ">
+              <Link to="/signup" className="text-[#FD7967] hover:underline ">
                 Forgot password?
               </Link>
             </div>
