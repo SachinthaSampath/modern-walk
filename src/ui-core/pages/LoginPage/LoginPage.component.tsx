@@ -121,7 +121,7 @@ const LoginPage: React.FC<LoginPageProps> = (): React.JSX.Element => {
   return (
     <>
       <div className="flex h-screen flex-col items-center justify-center">
-        <H1 className="font-[Qhicksand] text-[48px] font-bold">Modern Walk</H1>
+        <H1 className="font-[Qhicksand] text-[48px] font-bold"><Link reloadDocument to="/">Modern Walk</Link></H1>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

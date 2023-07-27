@@ -1,6 +1,6 @@
 import { variants } from "../../../../types";
 
-export type CustomPopoverProps = {
+export type CustomDialogProps = {
   triggerText?: string;
   titleText?: string;
   children?: React.ReactNode | string;

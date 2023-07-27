@@ -17,6 +17,15 @@ import {
   Toaster,
 } from "./ui-core";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui-core";
+
 import { Label } from "./ui-core";
 import { RadioGroup, RadioGroupItem } from "./ui-core";
 
@@ -50,6 +59,7 @@ import {
 } from "./ui-core";
 
 import { Checkbox } from "./ui-core";
+import { CustomDialog } from "./ui-core";
 
 const links = [
   { href: "/", label: "Home" },
@@ -275,9 +285,25 @@ const Test = () => {
           titleText="Title"
           cancelText="Cancel"
           actionText="Action Button"
+          containerClassName="min-h-[200px]"
         >
           <div>abc</div>
         </CustomPopover>
+
+        <CustomDialog
+          triggerText="Opens"
+          titleText="Clear Cart"
+          cancelText="Cancel"
+          actionText="Confirm"
+          containerClassName="min-h-[200px]"
+          actionAction={() => {}}
+          cancelAction={() => {}}
+        >
+          <p className="text-[16px] font-normal text-[#182132]">
+            All the items in your cart will be removed! Please confirm to
+            proceed.
+          </p>
+        </CustomDialog>
 
         <Popover>
           <PopoverTrigger asChild>

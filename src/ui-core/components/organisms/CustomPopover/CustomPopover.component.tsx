@@ -9,6 +9,7 @@ import {
   PopoverClose,
 } from ".././../../../ui-core";
 import { XMarkIcon } from "@heroicons/react/20/solid";
+import { cn } from "../../../../lib/utils";
 
 const CustomPopover = ({
   triggerText,
@@ -18,20 +19,23 @@ const CustomPopover = ({
   actionText,
   actionAction,
   cancelAction,
+  containerClassName,
+  variant,
 }: CustomPopoverProps) => {
+  const containerClass = cn("min-h-[440px]", containerClassName);
+
   return (
     <>
       <Popover>
         <PopoverTrigger>{triggerText}</PopoverTrigger>
         <PopoverContent className="relative flex min-h-[300px] min-w-[432px] flex-col justify-between p-8 pb-4">
-          <h4 className="text-xl font-bold">Title</h4>
-          <div className="">
-            {children}
-
+          <div>
+            <h4 className="text-xl font-bold">{titleText}</h4>
             <PopoverClose className="absolute right-6 top-[34px]">
               <XMarkIcon className="h-5 w-5 text-[#182132]/30" />
             </PopoverClose>
           </div>
+          <div className={containerClass}>{children}</div>
           <div className="space-x-[10px]">
             <Button
               onClick={cancelAction}

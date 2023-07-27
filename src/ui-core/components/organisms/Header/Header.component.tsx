@@ -17,6 +17,8 @@ import {
   MenubarSub,
   MenubarSubContent,
   MenubarSubTrigger,
+  CustomPopover,
+  CustomDialog,
 } from "../../../../ui-core";
 import { ShoppingCartIcon } from "lucide-react";
 import { useToast } from "../../../../ui-core";
@@ -109,11 +111,11 @@ export default function Header({
             </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
-        {user.isLoggedIn ? (
-          <MenubarMenu>
-            <MenubarTrigger>
-              <ShoppingCartIcon />
-            </MenubarTrigger>
+        <MenubarMenu>
+          <MenubarTrigger>
+            <ShoppingCartIcon />
+          </MenubarTrigger>
+          {user.isLoggedIn ? (
             <MenubarContent>
               <MenubarItem
                 onClick={() => {
@@ -123,22 +125,44 @@ export default function Header({
                 View Cart
               </MenubarItem>
               <MenubarItem
-                onClick={() => {
-                  localStorage.removeItem("cart");
-                  toast({
-                    title: "Cart cleared!",
-                  });
-                  navigate("/cart");
+                onClick={(event) => {
+                  event.preventDefault();
                 }}
               >
-                Clear Cart
+                <CustomDialog
+                  triggerText="Clear Cart"
+                  titleText="Title"
+                  cancelText="Cancel"
+                  actionText="Action Button"
+                  containerClassName="min-h-[200px]"
+                  actionAction={() => {
+                    localStorage.removeItem("cart");
+                    toast({
+                      title: "Cart cleared!",
+                    });
+                    navigate("/cart");
+                  }}
+                  cancelAction={() => {
+                    navigate("/cart");
+                  }}
+                >
+                  <p className="text-[16px] font-normal text-[#182132]">
+                    All the items in your cart will be removed! Please confirm
+                    to proceed.
+                  </p>
+                </CustomDialog>
               </MenubarItem>
-              <MenubarItem>Checkout</MenubarItem>
             </MenubarContent>
-          </MenubarMenu>
-        ) : (
-          <></>
-        )}
+          ) : (
+            <MenubarContent>
+              <MenubarItem>
+                <Link to="/login" className="w-full">
+                  Login
+                </Link>
+              </MenubarItem>
+            </MenubarContent>
+          )}
+        </MenubarMenu>
 
         <MenubarMenu>
           <MenubarTrigger>
