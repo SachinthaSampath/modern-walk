@@ -57,7 +57,7 @@ const CustomDialog = ({
                 className="h-12 w-44 rounded-[8px] px-6 pb-[10px] pt-[14px]"
                 variant={"primary"}
               >
-                {actionText}
+                <DialogClose>{actionText}</DialogClose>
               </Button>
             </div>
           </DialogFooter>

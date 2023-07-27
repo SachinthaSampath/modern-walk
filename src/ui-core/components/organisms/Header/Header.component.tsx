@@ -133,7 +133,7 @@ export default function Header({
                   triggerText="Clear Cart"
                   titleText="Title"
                   cancelText="Cancel"
-                  actionText="Action Button"
+                  actionText="Confirm"
                   containerClassName="min-h-[200px]"
                   actionAction={() => {
                     localStorage.removeItem("cart");
@@ -183,14 +183,17 @@ export default function Header({
             {user.isLoggedIn ? (
               <>
                 <MenubarItem>
-                  <Link to="/login">Logout</Link>
+                  <Link to="/login" className="w-full">
+                    Logout
+                  </Link>
                 </MenubarItem>
-                <MenubarItem>Edit...</MenubarItem>
               </>
             ) : (
               <>
                 <MenubarItem>
-                  <Link to="/login">Login</Link>
+                  <Link to="/login" className="w-full">
+                    Login
+                  </Link>
                 </MenubarItem>
               </>
             )}

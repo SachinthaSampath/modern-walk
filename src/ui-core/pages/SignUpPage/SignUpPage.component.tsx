@@ -256,12 +256,12 @@ const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
               </FormItem>
             )}
           />
-          <p className="my-4">
-            <Button variant={"primary"} type="submit" className="mt-3 w-full">
-              SignUp
-            </Button>
-            <Button variant={"secondary"} type="button" className="mt-3 w-full">
+          <p className="my-4 flex justify-end space-x-[16px]">
+            <Button variant={"outline"} type="button" className="w-[99px]">
               <Link to="/login">Login</Link>
+            </Button>
+            <Button variant={"primary"} type="submit" className="w-[99px]">
+              SignUp
             </Button>
           </p>
         </form>
