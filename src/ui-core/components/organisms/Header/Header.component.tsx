@@ -195,6 +195,11 @@ export default function Header({
                     Login
                   </Link>
                 </MenubarItem>
+                <MenubarItem>
+                  <Link to="/signup" className="w-full">
+                    SignUp
+                  </Link>
+                </MenubarItem>
               </>
             )}
           </MenubarContent>
