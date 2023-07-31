@@ -1,11 +1,11 @@
 import { variants } from "../../../../types";
 
 export type CustomPopoverProps = {
-  triggerText?: string;
+  triggerText?: string | React.ReactNode;
   titleText?: string;
   children?: React.ReactNode | string;
-  cancelText?: string;
-  actionText?: string;
+  cancelText?: string | React.ReactNode;
+  actionText?: string | React.ReactNode;
   cancelAction?: () => void;
   actionAction?: () => void;
   variant?: keyof typeof variants;

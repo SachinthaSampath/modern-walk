@@ -22,6 +22,7 @@ import {
 } from "../../../../ui-core";
 import { ShoppingCartIcon } from "lucide-react";
 import { useToast } from "../../../../ui-core";
+import { Item } from "../../../../types";
 
 export default function Header({
   headingText,
@@ -32,7 +33,7 @@ export default function Header({
   const { toast } = useToast();
   return (
     <>
-      <Menubar className="mt-0 h-12 w-full justify-end rounded-none border-0 bg-mwprimarynormal text-white">
+      <Menubar className="mt-0 h-12 w-full justify-end space-x-2 rounded-none border-0 bg-mwprimarynormal text-white">
         <MenubarMenu>
           <MenubarTrigger>File</MenubarTrigger>
           <MenubarContent>
@@ -112,56 +113,81 @@ export default function Header({
           </MenubarContent>
         </MenubarMenu>
         <MenubarMenu>
-          <MenubarTrigger>
-            <ShoppingCartIcon />
-          </MenubarTrigger>
-          {user.isLoggedIn ? (
-            <MenubarContent>
-              <MenubarItem
-                onClick={() => {
-                  navigate("/cart");
+          <CustomPopover
+            triggerText={<ShoppingCartIcon />}
+            titleText="Your Cart"
+            cancelText={
+              <CustomDialog
+                triggerText="Clear Cart"
+                titleText="Clear Cart"
+                cancelText="Cancel"
+                actionText="Confirm"
+                containerClassName="min-h-[200px]"
+                actionAction={() => {
+                  localStorage.removeItem("cart");
+                  toast({
+                    title: "Cart cleared!",
+                  });
+                  navigate("/");
                 }}
+                cancelAction={() => {}}
               >
-                View Cart
-              </MenubarItem>
-              <MenubarItem
-                onClick={(event) => {
-                  event.preventDefault();
-                }}
-              >
-                <CustomDialog
-                  triggerText="Clear Cart"
-                  titleText="Title"
-                  cancelText="Cancel"
-                  actionText="Confirm"
-                  containerClassName="min-h-[200px]"
-                  actionAction={() => {
-                    localStorage.removeItem("cart");
-                    toast({
-                      title: "Cart cleared!",
-                    });
-                    navigate("/cart");
-                  }}
-                  cancelAction={() => {
-                    navigate("/cart");
-                  }}
-                >
-                  <p className="text-[16px] font-normal text-[#182132]">
-                    All the items in your cart will be removed! Please confirm
-                    to proceed.
+                <p className="text-[16px] font-normal text-[#182132]">
+                  All the items in your cart will be removed! Please confirm to
+                  proceed.
+                </p>
+              </CustomDialog>
+            }
+            actionText="Checkout"
+            containerClassName="min-h-[20px]"
+            actionAction={() => {
+              navigate("/cart");
+            }}
+            cancelAction={() => {
+              // localStorage.removeItem("cart");
+              // toast({
+              //   title: "Cart cleared!",
+              // });
+              // navigate("/");
+            }}
+          >
+            <div className="text-[18px] font-normal text-[#182132]">
+              {(() => {
+                //get the cart from local storage
+                let cartRow = localStorage.getItem("cart");
+                let cart: { id: number; qty: number; data: Item }[] = [];
+                if (cartRow) {
+                  cart = JSON.parse(cartRow);
+                }
+                let total = cart.reduce(
+                  (accumulator, currentVal) =>
+                    accumulator +
+                    Number(currentVal.data.price) * currentVal.qty,
+                  0
+                );
+
+                // cart.map((item) => {
+                //   console.log(item);
+                //   return (
+                //     <>
+                //       <p>{item.data?.title}</p>
+                //       <p>{item.qty}</p>
+                //       <p className="text-right">Rs. {item.data?.price}</p>
+                //       <p className="text-right">
+                //         Rs. {Number(item.data.price) * item.qty}{" "}
+                //       </p>
+                //     </>
+                //   );
+                // });
+
+                return (
+                  <p className="flex space-x-7">
+                    <span>Total :</span> <strong> Rs. {total} </strong>{" "}
                   </p>
-                </CustomDialog>
-              </MenubarItem>
-            </MenubarContent>
-          ) : (
-            <MenubarContent>
-              <MenubarItem>
-                <Link to="/login" className="w-full">
-                  Login
-                </Link>
-              </MenubarItem>
-            </MenubarContent>
-          )}
+                );
+              })()}
+            </div>
+          </CustomPopover>
         </MenubarMenu>
 
         <MenubarMenu>
