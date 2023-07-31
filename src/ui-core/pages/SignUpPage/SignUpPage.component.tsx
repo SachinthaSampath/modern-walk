@@ -6,6 +6,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UsersAPI } from "../../../services";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import {
+  auth,
+  createUserDocumentFromAuth,
+  signInWithGithubPopup,
+  signInWithGooglePopup,
+} from "../../../utils/Firebase.utils";
+
 import { Button } from "../../../ui-core";
 import {
   Form,
@@ -262,6 +269,23 @@ const SignUpPage: React.FC<SignUpPageProps> = (): React.JSX.Element => {
             </Button>
             <Button variant={"primary"} type="submit" className="w-[99px]">
               SignUp
+            </Button>
+          </p>
+
+          <p className="my-4 flex justify-end space-x-[16px]">
+            <Button
+              variant={"primary"}
+              type="button"
+              className="w-[99px]"
+              onClick={async () => {
+                // const { user } = await signInWithGooglePopup();
+                const { user } = await signInWithGooglePopup();
+                console.log(user);
+                const userDocRef = createUserDocumentFromAuth(user);
+                console.log(userDocRef);
+              }}
+            >
+              SignUp with Google
             </Button>
           </p>
         </form>
