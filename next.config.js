@@ -3,6 +3,7 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  images:["fakestoreapi.com"]
 }
 
 module.exports = nextConfig
