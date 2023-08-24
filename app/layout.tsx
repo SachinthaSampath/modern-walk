@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { ReactNode } from "react";
 // import "@/styles/globals.css";
 
 import { Header } from "@/ui-core";
@@ -15,7 +15,9 @@ import { usePathname, useRouter } from "next/navigation";
 
 const queryClient = new QueryClient();
 
-const layout = {
+const layout: {
+  [store: string]: ({ children }: { children: React.ReactNode }) => ReactNode;
+} = {
   store1: Store1Layout,
   store2: Store2Layout,
 };
@@ -31,13 +33,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  console.log(pathname);
+  // console.log(pathname);
 
   //finding the tenant based on the pathname
   let matches = pathname.match(/^\/([^/]+)/);
   const tenant = matches ? matches[0] : "";
 
-  const TenantLayout = (layout[tenant] as React.ReactNode) ?? React.Fragment;
+  const TenantLayout =
+    (layout[tenant] as ({
+      children,
+    }: {
+      children: React.ReactNode;
+    }) => ReactNode) ?? React.Fragment;
 
   const HeaderLayout =
     pathname.includes("/login") || pathname.includes("/signup")

@@ -1,4 +1,4 @@
-
+"use client"
 import React, { useContext } from "react";
 import { createContext, useState } from "react";
 import { User } from "../types/User";
@@ -46,7 +46,7 @@ const UserProvider: React.FC<UserProviderProps> = ({
   //data to send with context provider
   const data = {
     user,
-    setUser,
+    setUser:updateUser,
   };
 
   return <UserContext.Provider value={data}>{children}</UserContext.Provider>;
