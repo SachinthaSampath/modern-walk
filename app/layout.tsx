@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import React, { ReactNode } from "react";
 // import "@/styles/globals.css";
@@ -12,6 +12,7 @@ import { Toaster } from "@/ui-core";
 import Store1Layout from "@/ui-core/layouts/PageLayouts/Store1Layout";
 import Store2Layout from "@/ui-core/layouts/PageLayouts/Store2Layout";
 import { usePathname, useRouter } from "next/navigation";
+import Providers from "@/contexts/Providers";
 
 const queryClient = new QueryClient();
 
@@ -55,15 +56,13 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <QueryClientProvider client={queryClient}>
-          <UserProvider>
-            <ThemeProvider>
-              <TenantLayout>
-                <HeaderLayout />
-                {children}
-                <Toaster />
-              </TenantLayout>
-            </ThemeProvider>
-          </UserProvider>
+          <Providers>
+            <TenantLayout>
+              <HeaderLayout />
+              {children}
+              <Toaster />
+            </TenantLayout>
+          </Providers>
         </QueryClientProvider>
       </body>
     </html>

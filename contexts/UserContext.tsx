@@ -1,4 +1,4 @@
-"use client"
+
 import React, { useContext } from "react";
 import { createContext, useState } from "react";
 import { User } from "../types/User";

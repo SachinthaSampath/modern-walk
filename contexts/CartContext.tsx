@@ -1,3 +1,4 @@
+
 import { Item } from "@/types";
 import { createContext, useContext, useState } from "react";
 
@@ -27,7 +28,7 @@ const CartContext = createContext<CartCTXProps | null>(null);
 const CartProvider: React.FC<CartProviderProps> = ({
   children,
 }: CartProviderProps) => {
-    
+
   //states
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartTotal, setCartTotal] = useState<number>(0);
