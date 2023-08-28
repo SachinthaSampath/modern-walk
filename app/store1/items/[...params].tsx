@@ -14,7 +14,7 @@ const Item = ({ item }: { item: Item }) => {
       <div className="flex flex-col space-y-3">
         <h1 className="font-bold text-xl">{item.title}</h1>
         <p>{item.description}</p>
-        <Image src={item.image} width="300" height="300" alt="" />
+        <img src={item.image} width="300" height="300" alt="" />
       </div>
     </div>
   );

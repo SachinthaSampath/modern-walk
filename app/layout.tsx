@@ -1,8 +1,6 @@
 "use client";
 
 import React, { ReactNode } from "react";
-// import "@/styles/globals.css";
-
 import { Header } from "@/ui-core";
 
 import { UserProvider, ThemeProvider } from "@/contexts/contexts";
@@ -34,12 +32,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  console.log(pathname);
+  // console.log(pathname);
 
   //finding the tenant based on the pathname
   let matches = pathname.match(/^\/([^/]+)/);
   let tenant = matches ? matches[0] : "";
-  console.log(tenant);
+  console.log(pathname);
 
   const TenantLayout =
     (layout[tenant] as ({
@@ -47,6 +45,7 @@ export default function RootLayout({
     }: {
       children: React.ReactNode;
     }) => ReactNode) ?? React.Fragment;
+  console.log(TenantLayout);
 
   const HeaderLayout =
     pathname.includes("/login") || pathname.includes("/signup")

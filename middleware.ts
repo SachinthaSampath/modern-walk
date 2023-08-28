@@ -23,7 +23,7 @@ export default async function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const hostname = req.headers.get("host");
 
-  console.log("---middleware---");
+  // console.log("---middleware---");
   // console.log(hostname);
 
   // If localhost, assign the host value manually
@@ -39,20 +39,17 @@ export default async function middleware(req: NextRequest) {
   // console.log(currentHost);
 
   const subDomains = await getSubdomainPaths();
+  const pathNameStart = url.pathname.split("/")[0];
 
-  //******* possible bug with pathname start - should be 0 but adding '' as first element in the array
-  const pathNameStart = url.pathname.split("/")[1];
+  // Prevent security issues – users should not be able to canonically access
+  if (subDomains.includes(pathNameStart)) {
+    url.pathname = `/404`;
+  } else {
+    url.pathname = `/${currentHost}${url.pathname}`;
+  }
 
-// console.log(pathNameStart);
-
-//   // Prevent security issues – users should not be able to canonically access
-//   if (!subDomains.includes(pathNameStart)) {
-//     url.pathname = `/404`;
-//   } else {
-//     url.pathname = `/${currentHost}${url.pathname}`;
-//   }
-console.log(url.pathname);
-url.pathname="/mens"
+  // console.log(url.pathname);
+  
   return NextResponse.rewrite(url);
 }
 

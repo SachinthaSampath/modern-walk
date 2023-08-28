@@ -19,8 +19,7 @@ import {
   CustomDialog,
 } from "@/ui-core";
 import { ShoppingCartIcon } from "lucide-react";
-import { useToast } from "@/ui-core";
-import { Item } from "@/types";
+import { useToast } from "@/ui-core"; 
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -207,7 +206,7 @@ export default function Header({
           <MenubarTrigger>
             {user.isLoggedIn ? (
               <>
-                <Image
+                <img
                   className="w-4 text-white lg:w-6"
                   src="/user.png"
                   alt="User icon"
