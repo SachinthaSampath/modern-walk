@@ -207,7 +207,7 @@ export default function Header({
           <MenubarTrigger>
             {user.isLoggedIn ? (
               <>
-                <Image
+                <img
                   className="w-4 text-white lg:w-6"
                   src="/user.png"
                   alt="User icon"
