@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getHostnameDataOrDefault, getSubdomainPaths } from "./lib/site-db";
+import { getSubdomainPaths } from "./lib/site-db";
 
 // export const config = {
 //   matcher: ["/", "/about", "/_sites/:path"],
@@ -49,16 +49,6 @@ export default async function middleware(req: NextRequest) {
   }
 
   // console.log(url.pathname);
-  
+
   return NextResponse.rewrite(url);
 }
-
-
-
-
-
-
-
-
-
-
