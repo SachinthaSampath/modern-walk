@@ -10,12 +10,12 @@
 
     --mw-active:#4684f780;
 
-    --primary-normal: #765af3;
-    --primary-hover: #5043c7;
+    --primary-normal: #f3645a;
+    --primary-hover: #c74343;
     --primary-selected: #7871e0;
-    --primary-inverse: #b8a6f7;
-    --primary-disabled: #c5a6f7;
-    --primary-inverse-hover: #b388eb;
+    --primary-inverse: #f7a6a6;
+    --primary-disabled: #f7a6a6;
+    --primary-inverse-hover: #eb8888;
     --primary-click: #c488eb;
 
     --typo-main: #001948;
