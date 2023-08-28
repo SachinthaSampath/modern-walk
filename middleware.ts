@@ -34,7 +34,7 @@ export default async function middleware(req: NextRequest) {
   const currentHost =
     process.env.NODE_ENV === "production" && process.env.VERCEL === "1"
       ? hostname.replace(`.multi-tenant-next-sage.vercel.app`, "")
-      : hostname.replace(`.modernwalk.local:3000`, "");
+      : hostname.replace(`.modernwalk.com:3000`, "");
 
   // console.log(currentHost);
 
