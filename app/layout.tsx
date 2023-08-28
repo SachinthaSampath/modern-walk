@@ -34,11 +34,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  // console.log(pathname);
+  console.log(pathname);
 
   //finding the tenant based on the pathname
   let matches = pathname.match(/^\/([^/]+)/);
-  const tenant = matches ? matches[0] : "";
+  let tenant = matches ? matches[0] : "";
+  console.log(tenant);
 
   const TenantLayout =
     (layout[tenant] as ({
